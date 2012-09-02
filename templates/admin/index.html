@@ -4,73 +4,25 @@
 
 {% block body %}
 <div class="row">
-	<div class="column span2">
+	<div class="column span12">
 		<br><br><Br>
-		<b>List of all text/copy</b>
-		{% for textid, content in texts.iteritems() %}
-			<li><a href="/admin/content/edit/{{textid}}">{{textid}}</a>
-				<br>
-				{{content.description}}
-			</li>
+		<b>Classnote Entries</b>
+		<table class="table">
+		{% for e in entries %}
+			<tr>
+				<td class="span3">{{ e.class_date.strftime('%Y-%m-%d') }}</td>
+				<td class="span3">{{ e.title }}</td>
+				<td class="span3">{{ e.description }}</td>
+				<td class="span3">
+					<a class="btn" href="/admin/entry/edit/{{e._id}}">edit</a>
+					<a class="btn" href="entry/{{e.url_title}}">view</a>
+				</td>
+			</tr>
+			
 		{% endfor %}
+		</table>
 	</div>
-	<div class="column span10">
-		<br><br><br>
-		{% with messages = get_flashed_messages(with_categories=true) %}
-			{% if messages %}
-				<ul class=flashes>
-				{% for category, message in messages %}
-					{% if category == "message" %}
-					<div class="alert alert-info">
-	  					<button class="close" data-dismiss="alert">×</button>
-						{{ message }}
-					</div>
-					{% endif %}
-				{% endfor %}
-				</ul>
-			{% endif %}
-		{% endwith %}
-
-		<form method="POST" action="/api/admin/content/new" id="admin_content_new" class="well form-horizontal">
-			<fieldset>
-				<legend>Create a new text/copy</legend>
-				<div class="control-group">
-					<label class="control-label" for="content_id">Unique ID</label>
-					<div class="controls">
-						<input type="text" class="input-xlarge" name="content_id" id="content_id">
-						<p class="help-block">A unique id, NO SPACES, dashes and underscores are fine.</p>
-					</div>
-				</div>
-
-				<div class="control-group">
-					<label class="control-label" for="description">Description</label>
-					<div class="controls">
-						<input type="text" class="input-xlarge" name="description" id="description">
-						<p class="help-block">Where is this text/copy going to be used.</p>
-					</div>
-				</div>
-			</fieldset>
-
-			<fieldset>
-				<legend>Languages</legend>
-				<div class="control-group">
-					<label class="control-label" for="english">English</label>
-					<div class="controls">
-						<textarea  rows="5" style="width:550px" name="language[en]" id="english"></textarea>
-						
-					</div>
-					<br>
-					<label class="control-label" for="german">German</label>
-					<div class="controls">
-						<textarea rows="5" style="width:550px" name="language[de]" id="german"></textarea>
-						
-					</div>
-				</div>	
-
-			</fieldset>
-			<input type="submit" value="Create new text" class="btn btn-primary">
-		</form>
-	</div>
+	
 </div>
 
 

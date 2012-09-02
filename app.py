@@ -99,8 +99,15 @@ def style_guide():
 @app.route('/admin', methods=["GET"])
 @login_required
 def admin_main():
-	return "inside admin"
 
+	entries = models.ClassNote.objects().order_by('+class_date')
+	
+	templateData = {
+		'entries' : entries
+	}	
+
+	return render_template('/admin/index.html', **templateData)
+	
 
 @app.route('/admin/entry', methods=["GET","POST"])
 @login_required
@@ -118,8 +125,7 @@ def admin_create_entry():
 			'assignment' : request.form.get('assignment'),
 			'class_date' : datetime.datetime.strptime(request.form.get('class_date'), "%Y-%m-%d")
 		}
-		print entryData
-
+		
 		entry = models.ClassNote(**entryData)
 		
 		try:
@@ -131,7 +137,34 @@ def admin_create_entry():
 			return "error on saving document"
 		
 
-	return render_template('/admin/content_edit.html')
+	return render_template('/admin/entry_new.html')
+
+
+@app.route("/admin/entry/edit/<entry_id>", methods=["GET","POST"])
+@login_required
+def admin_entry_edit(entry_id):
+	# get single document returned
+	entry = models.ClassNote.objects().with_id(entry_id)
+	if entry:
+		if request.method == "POST":
+			entry.title = request.form.get('title','')
+			entry.url_title = request.form.get('url_title','')
+			entry.description = request.form.get('description','')
+			entry.published = True if request.form['published'] == "true" else False
+			entry.github_url = request.form.get('github_url',None)
+			entry.demo_url = request.form.get('demo_url',None)
+			entry.content = request.form.get('content')
+			entry.assignment = request.form.get('assignment')
+			entry.class_date = datetime.datetime.strptime(request.form.get('class_date'), "%Y-%m-%d")
+			
+			entry.save()
+
+			print "************************"
+		
+		return render_template('/admin/entry_edit.html', entry=entry)
+
+	else:
+		return "Unable to find entry %s" % entry_id		
 
 @app.route("/login", methods=["GET", "POST"])
 def login():
@@ -171,6 +204,8 @@ def logout():
     return redirect(url_for("index"))
 
 
+def datetimeformat(value, format='%H:%M / %d-%m-%Y'):
+    return value.strftime(format)
 
 
 

@@ -10,13 +10,13 @@
 	<div class="column span12">
 		<br><br><br>
 
-		<form method="POST" action="" id="admin_entry_create" class="well form-horizontal">
+		<form method="POST" action="" id="admin_entry_edit" class="well form-horizontal">
 			<fieldset>
-          		<legend>Class entry</legend>
+          		<legend>Edit Class Entry</legend>
 				<div class="control-group">
 					<label class="control-label" for="title">Title</label>
 					<div class="controls">
-					  <input type="text" class="span7 input-xlarge" name="title" id="title">
+					  <input type="text" class="span7 input-xlarge" name="title" id="title" value="{{entry.title}}">
 					  <p class="hide help-block">In addition to freeform text, any HTML5 text-based input appears like so.</p>
 					</div>
 				</div>
@@ -24,7 +24,7 @@
 				<div class="control-group">
 					<label class="control-label" for="url_title">URL Title (Slug)</label>
 					<div class="controls">
-					  <input type="text" class="span7 input-xlarge" name="url_title" id="url_title">
+					  <input type="text" class="span7 input-xlarge" name="url_title" id="url_title" value="{{entry.url_title}}">
 					  <p class=" help-block">URL Title will be used to identify each entry. Only text, numbers, dashes and underscores.</p>
 					</div>
 				</div>
@@ -32,15 +32,15 @@
 				<div class="control-group">
 					<label class="control-label" for="description">Description</label>
 					<div class="controls">
-					  <textarea class="span7 input-xlarge" name="description" id="description"></textarea>
+					  <textarea class="span7 input-xlarge" name="description" id="description">{{entry.description}}</textarea>
 					  <p class=" help-block">Description of the class entry.</p>
 					</div>
 				</div>
 
 				<div class="control-group">
 					<label class="control-label" for="class_date">Class date</label>
-					<div class="controls" data-date="09-01-2012" data-date-format="dd-mm-yyyy">
-					  <input type="date" class="datepicker span3 input-xlarge" value="09-01-2012" name="class_date" id="class_date">
+					<div class="controls">
+					  <input type="date" class="datepicker span3 input-xlarge" value="{{entry.class_date.strftime("%Y-%m-%d")}}" name="class_date" id="class_date">
 					  <p class=" help-block"></p>
 					</div>
 				</div>
@@ -51,8 +51,8 @@
 					<label class="control-label" for="published">Status</label>
 					<div class="controls">
 					  <select name="published" id="published">
-					  	<option value="false">Draft</option>
-					  	<option value="true">Publish</option>
+					  	<option value="false" {% if entry.published == False %}selected="SELECTED"{% endif %}>Draft</option>
+					  	<option value="true"  {% if entry.published == True %}selected="SELECTED"{% endif %}>Publish</option>
 					  </select>
 					  <p class=" help-block"></p>
 					</div>
@@ -65,7 +65,7 @@
 				<div class="control-group">
 					<label class="control-label" for="github_url">Github Repo URL</label>
 					<div class="controls">
-					  <input type="text" class="span7 input-xlarge" name="github_url" id="github_url">
+					  <input type="text" class="span7 input-xlarge" name="github_url" id="github_url" value="{{ entry.github_url }}">
 					  
 					</div>
 				</div>
@@ -74,7 +74,7 @@
 				<div class="control-group">
 					<label class="control-label" for="demo_url">DEMO URL</label>
 					<div class="controls">
-					  <input type="text" class="span7 input-xlarge" name="demo_url" id="demo_url">
+					  <input type="text" class="span7 input-xlarge" name="demo_url" id="demo_url" value="{{ entry.demo_url }}">
 					</div>
 				</div>
           	</fieldset>
@@ -85,7 +85,7 @@
 				<div class="control-group">
 					<label class="control-label" for="content">Class Notes</label>
 					<div class="controls">
-					  <textarea class="span10 wysiwyg input-xlarge" style="width: 810px; height: 350px;" name="content" id="content"></textarea>
+					  <textarea class="span10 wysiwyg input-xlarge" style="resize:both; width: 810px; height: 350px;" name="content" id="content">{{entry.content}}</textarea>
 					  
 					</div>
 				</div>
@@ -97,14 +97,14 @@
 				<div class="control-group">
 					<label class="control-label" for="assignment">Assignment</label>
 					<div class="controls">
-					  <textarea class="span10 wysiwyg input-xlarge" style="width: 810px; height: 200px;"  name="assignment" id="assignment"></textarea>
+					  <textarea class="span10 wysiwyg input-xlarge" style="resize:both; width: 810px; height: 200px;"  name="assignment" id="assignment">{{entry.assignment}}</textarea>
 					  
 					</div>
 				</div>
           	</fieldset>
 
 			
-			<input type="submit" value="Update text" class="btn btn-primary">
+			<input type="submit" value="Save entry" class="btn btn-primary">
 		</form>
 	</div>
 </div>
