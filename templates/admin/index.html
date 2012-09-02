@@ -3,21 +3,7 @@
 {% block styles %}{% endblock %}
 
 {% block body %}
-{% with messages = get_flashed_messages() %}
-  {% if messages %}
-  <br><br><Br>
-		
-  <div class="row">
-  	<div class="column span12">
-	    <ul class=flashes>
-	    {% for message in messages %}
-	      <li>{{ message|safe }}</li>
-	    {% endfor %}
-	    </ul>
-	</div>
-  </div>
-  {% endif %}
-{% endwith %}
+
 <div class="row">
 	<div class="column span12">
 		<br><br><Br>
