@@ -3,14 +3,33 @@
 {% block styles %}{% endblock %}
 
 {% block body %}
+{% with messages = get_flashed_messages() %}
+  {% if messages %}
+  <br><br><Br>
+		
+  <div class="row">
+  	<div class="column span12">
+	    <ul class=flashes>
+	    {% for message in messages %}
+	      <li>{{ message|safe }}</li>
+	    {% endfor %}
+	    </ul>
+	</div>
+  </div>
+  {% endif %}
+{% endwith %}
 <div class="row">
 	<div class="column span12">
 		<br><br><Br>
 		<b>Classnote Entries</b>
+		<a class="btn btn-small" href="/admin/entry">Create new entry</a>
+
+		<br><br>
+
 		<table class="table">
 		{% for e in entries %}
 			<tr>
-				<td class="span3">{{ e.class_date.strftime('%Y-%m-%d') }}</td>
+				<td class="span2">{{ e.class_date.strftime('%Y-%m-%d') }}</td>
 				<td class="span3">{{ e.title }}</td>
 				<td class="span3">{{ e.description }}</td>
 				<td class="span3">

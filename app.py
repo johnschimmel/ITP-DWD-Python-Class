@@ -21,6 +21,10 @@ app.secret_key = os.environ.get('SECRET_KEY')
 flask_bcrypt = Bcrypt(app)
 
 #mongolab connection
+# uses .env file to get connection string
+# using a remote db get connection string from heroku config
+# using a local mongodb put this in .env
+#       MONGOLAB_URI=mongodb://localhost:27017/dwdfall2012
 connect('dwdfall2012', host=os.environ.get('MONGOLAB_URI'))
 
 login_manager = LoginManager()
@@ -130,7 +134,8 @@ def admin_create_entry():
 		
 		try:
 			entry.save()
-			return "saved"
+			flash('Class entry:<b>%s</b> was saved' % entry.title)
+			return redirect('/admin')
 
 		except ValidationError:
 			app.logger.error(ValidationError.errors)
@@ -159,7 +164,6 @@ def admin_entry_edit(entry_id):
 			
 			entry.save()
 
-			print "************************"
 		
 		return render_template('/admin/entry_edit.html', entry=entry)
 
