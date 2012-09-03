@@ -71,7 +71,9 @@
 		{% for class in classnotes %}
 		{{ class.class_date.strftime("%B %d")}}
 		<h5>{{class.title}}</h5>
-		<a href="#"></a>
+		{% if class.published %}
+		<a href="/class/{{ class.url_title }}" class="btn btn-small">View notes</a>
+		{% endif %}
 		<hr/>
 		{% endfor %}
 	</div>

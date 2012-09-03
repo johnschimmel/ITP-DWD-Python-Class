@@ -1,0 +1,52 @@
+{% extends "/layout.html" %}
+
+{% block styles %}{% endblock %}
+
+{% block body %}
+
+<div class="row">
+	<div class="span2">
+		<br>
+		{{ entry.class_date.strftime('%B %d') }}
+		<ul>
+			<li><a href="#notes">Class notes</a></li>
+			<li><a href="#assignment">Assignment</a></li>
+		</ul>
+		
+	</div>
+	<div class="span10">
+		<div class="page-header">
+			<h2>{{ entry.title }}</h2>
+		</div>
+		
+		<h5>
+			{{ entry.description }}
+		</h5>
+
+		<hr>
+
+		<div id="notes">
+			{{ entry.content|safe }}
+		</div>
+
+		<hr>
+
+		<div class="page-header" id="assignment">
+			<h3>Assignment</h3>
+			
+		</div>
+		<div>
+			{{ entry.assignment|safe }}
+		</div>
+		
+		
+
+	</div>
+
+
+	
+</div>
+{% endblock %}
+
+{% block scripts %}
+{% endblock %}

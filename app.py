@@ -3,7 +3,7 @@ import os
 import re
 import datetime
 
-from flask import Flask, session, request, url_for, escape, render_template, json, jsonify, flash, redirect
+from flask import Flask, session, request, url_for, escape, render_template, json, jsonify, flash, redirect, abort
 from werkzeug.security import generate_password_hash, check_password_hash
 from flask.ext.login import (LoginManager, current_user, login_required,
                             login_user, logout_user, UserMixin, AnonymousUser,
@@ -57,7 +57,21 @@ def index():
 	return render_template('index.html', **templateData)
     #return 'Hello World!'
 
+@app.route('/class/<url_title>')
+def class_entry(url_title):
 
+	entry = models.ClassNote.objects(url_title=url_title).first()
+
+	if entry:
+		templateData = {
+			'entry' : entry
+		}
+		return render_template('entry.html', **templateData)
+	
+	else:
+		# return with 404 page
+		abort(404)
+		
 @app.route('/styleguide')
 def style_guide():
 	return render_template('style_guide.html')
@@ -212,6 +226,9 @@ def datetimeformat(value, format='%H:%M / %d-%m-%Y'):
     return value.strftime(format)
 
 
+@app.errorhandler(404)
+def page_not_found(error):
+    return render_template('page_not_found.html'), 404
 
 if __name__ == '__main__':
     # Bind to PORT if defined, otherwise default to 5000.
