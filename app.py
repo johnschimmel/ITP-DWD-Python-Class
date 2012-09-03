@@ -50,12 +50,9 @@ login_manager.setup_app(app)
 
 @app.route('/')
 def index():
-	templateData = {}
-
-	post = models.Post()
-	post.title = "123123"
-	post.save()
-
+	templateData = {
+		'classnotes' : models.ClassNote.objects.order_by('+class_date')
+	}
 
 	return render_template('index.html', **templateData)
     #return 'Hello World!'
@@ -65,6 +62,9 @@ def index():
 def style_guide():
 	return render_template('style_guide.html')
 
+#
+# Route disabled - enable route to allow user registration.
+#
 # @app.route("/register", methods=["GET","POST"])
 # def register():
 # 	registerForm = RegisterForm(csrf_enabled=True)

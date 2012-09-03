@@ -45,6 +45,22 @@
     </div>
   </header>
   <div role="main"  class="container">
+    {% with messages = get_flashed_messages() %}
+      {% if messages %}
+      <br><br><Br>
+        
+      <div class="row">
+        <div class="column span12">
+          <ul class=flashes>
+          {% for message in messages %}
+            <li>{{ message|safe }}</li>
+          {% endfor %}
+          </ul>
+      </div>
+      </div>
+      {% endif %}
+    {% endwith %}
+    
     {% block body %}{% endblock %}
   </div>
   <footer>
