@@ -71,6 +71,49 @@ def class_entry(url_title):
 	else:
 		# return with 404 page
 		abort(404)
+
+@app.route('/class/<url_title>/add_assignment', methods=['POST'])
+def api_addassignment(url_title):
+	
+	honeypot = request.form.get('email')
+	
+	if request.method == "POST" and honeypot is None:
+		entry = models.ClassNote.objects(url_title=url_title).first()
+		
+		if entry:
+
+			entryData = {
+				'name' : request.form.get('name',''),
+				'url' : request.form.get('url',''),
+				'description' : request.form.get('description','')	
+			}
+
+			print "received assignment"
+			print entryData
+			
+			if entryData['name'] != '' and entryData['url'] != '' and entryData['description'] != '':
+				assignment = models.Assignment(**entryData)
+				entry.assignments.append(assignment)
+				entryData['status'] = 'OK'
+
+			else:
+				
+				entryData = { 'status' : 'ERROR' }
+
+			try:
+				entry.save()
+				return jsonify(**entryData)
+				
+
+			except ValidationError:
+				app.logger.error(ValidationError.errors)
+				return "error on saving document"
+		else:
+			abort(500)
+
+	else:
+		# no GET on this route
+		abort(404)
 		
 @app.route('/styleguide')
 def style_guide():

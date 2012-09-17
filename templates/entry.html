@@ -37,6 +37,42 @@
 		</div>
 		<div>
 			{{ entry.assignment|safe }}
+		
+			<hr>
+			<div class="row">
+				<div class="span3" id="submit_form_container">
+					<h3>Post your assignment</h3>
+					<label for="name">Name</label>
+					<input type="text" id="form_name" name="name">
+					<br>
+					<label for="url">URL</label>
+					<input type="text" id="form_url" name="url">
+					<br>
+					<label for="description">Description</label>
+					<textarea id="form_description" name="description"></textarea>
+					<br>
+					<input type="text" name="email" style="display:none;">
+					<p>All fields are required</p>
+					<input type="button" id="submit_assignment" value="Submit assignment">
+				</div>
+
+				<div class="span5">
+					<h3>Assignments</h3>
+					<div id="assignment_container">
+						{% for a in entry.assignments %}
+
+						<div class="assignment">
+							<strong>{{ a.name }}</strong> | {{ a.timestamp.strftime('%B %d') }}
+							<p><a href="{{ a.url}}">{{ a.url}}</a></p>
+							<p>{{ a.description }}</p>
+							<hr/>
+						</div>
+						{% endfor %}
+					</div>
+				</div>
+			</div><!-- row -->
+			<hr/>
+
 		</div>
 		
 		<div class="page-header" id="comments">
@@ -67,4 +103,5 @@
 {% endblock %}
 
 {% block scripts %}
+<script src="{{ url_for('static', filename='js/entry.js') }}" type="text/javascript"></script>
 {% endblock %}
