@@ -114,7 +114,12 @@ def api_addassignment(url_title):
 	else:
 		# no GET on this route
 		abort(404)
-		
+	
+@app.route('/page/<pageid>')
+def page(pageid):
+
+	return render_template('pages/'+pageid+'.html')
+
 @app.route('/styleguide')
 def style_guide():
 	return render_template('style_guide.html')
