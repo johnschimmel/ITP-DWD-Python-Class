@@ -133,4 +133,101 @@ git commit -am "I made some changes...."
 <a href="http://disqus.com" class="dsq-brlink">comments powered by <span class="logo-disqus">Disqus</span></a>
 
 
+<h2 id="add-a-mongodb-to-your-heroku-app">Add a MongoDB to your Heroku app</h2>
+
+<p>We'll use MongoLabs as our MongoDB provider but feel free to try MongoHQ or another.</p>
+
+<p>The steps to get the database</p>
+
+<ul>
+<li>Add Heroku Addon to existing app.</li>
+<li>Get the database connection string from Heroku config.</li>
+<li>Add connection string to .env file</li>
+<li>Add database library to requirements.txt</li>
+<li>Add database connection information to app.py</li>
+</ul>
+
+<h3 id="add-heroku-addon-to-existing-app">Add Heroku Addon to existing app</h3>
+
+<p>Information here <a href="https://addons.heroku.com/mongolab">https://addons.heroku.com/mongolab</a>. We'll use the Starter plan, it's free and gives us 0.5 GB to test out MongoDB.</p>
+
+<p>Inside your code directory in Terminal, run the following command</p>
+
+<pre><code>heroku addons:add mongolab:starter
+</code></pre>
+
+<p>If all goes well you have just added MongoLab starter plan to your Heroku app. </p>
+
+<h3 id="get-the-database-connection-string">Get the database connection string</h3>
+
+<p>Heroku + MongoLab set up an account for you and provide a database connection string. This string is the URL including your username and password (freshly created) to connect to the database. </p>
+
+<p>View your connection string information with inside your code directory in Terminal.</p>
+
+<pre><code>heroku config | grep MONGOLAB_URI
+</code></pre>
+
+<p>You'll see something like</p>
+
+<pre><code>MONGOLAB_URI:     mongodb://heroku_app#####:RANDOMSTRINGOFCHARACTERS.mongolab.com:37467/heroku_app#####
+</code></pre>
+
+<p><strong>Do not share this information</strong></p>
+
+<p>(Heroku provides a lot of config variables for the app but we only need MONGOLAB_URI to see them all type 'heroku config' in the Terminal)</p>
+
+<h3 id="mongolab-connection-string-to-env-file">MongoLab Connection string to .env file</h3>
+
+<p>We can reference this MongoLab database when working locally. We put our config variables into a <strong>.env</strong> file. </p>
+
+<p>In a single line we can get the Heroku config var and put inside .env file. In Terminal, run the following command.</p>
+
+<pre><code>heroku config --shell | grep MONGOLAB_URI &gt; .env
+</code></pre>
+
+<p>This will create a new file in your directory called .env inside will be the MONGOLAB_URI variable and the connection string, ie. MONGOLAB_URI=connection string</p>
+
+<h3 id="add-database-library-to-requirementstxt">Add database library to requirements.txt</h3>
+
+<p>We'll be using two different MongoDB Python libraries. Add the following to you requirements.txt.</p>
+
+<pre><code>Flask-WTF==0.6
+mongoengine==0.6.2
+</code></pre>
+
+<p>Run PIP to install the new requirements</p>
+
+<p>If you have the runpip helper file.</p>
+
+<pre><code>. runpip
+</code></pre>
+
+<p>Or, manually run PIP</p>
+
+<pre><code>. venv/bin/activate
+pip install -r requirements.txt
+</code></pre>
+
+<h3 id="make-connection-information-inside-apppy">Make connection information inside app.py</h3>
+
+<p>Accept for the required database libraries, your code will be specific to your application. </p>
+
+<p>Include the following at the top of your app.py file</p>
+
+<pre><code>from mongoengine import *
+</code></pre>
+
+<p>A few lines below creating the <strong>app</strong> variable for Flask, below that statement make the connection</p>
+
+<pre><code>connect('mydata', host=os.environ.get('MONGOLAB_URI'))
+</code></pre>
+
+<p>The connect function is from mongoengine.</p>
+
+<p>host=os.environ.get('MONGOLAB_URI')  os.environ.get will grab the config variables from your <strong>.env</strong> file.</p>
+
+<p>'mydata', you can put anything in here, 'mydata' or 'mydatabase' or 'mongolab' it just needs a string.
+the </p>
+
+
 {% endblock %}
