@@ -25,7 +25,7 @@ flask_bcrypt = Bcrypt(app)
 # using a remote db get connection string from heroku config
 # using a local mongodb put this in .env
 #       MONGOLAB_URI=mongodb://localhost:27017/dwdfall2012
-connect('mydata',host=os.environ.get('MONGOLAB_URI'))
+connect('dwdfall2012', host=os.environ.get('MONGOLAB_URI'))
 
 login_manager = LoginManager()
 login_manager.anonymous_user = Anonymous

@@ -163,7 +163,7 @@ git commit -am "I made some changes...."
 
 <p>In a single line we can get the Heroku config var and put inside .env file. In Terminal, run the following command.</p>
 
-<pre><code>heroku config --shell | grep MONGOLAB_URI &gt; .env
+<pre><code>heroku config --shell | grep MONGOLAB_URI &gt;&gt; .env
 </code></pre>
 
 <p>This will create a new file in your directory called .env inside will be the MONGOLAB_URI variable and the connection string, ie. MONGOLAB_URI=connection string</p>
