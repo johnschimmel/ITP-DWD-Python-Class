@@ -6,7 +6,7 @@ import datetime
 from flask import Flask, session, request, url_for, escape, render_template, json, jsonify, flash, redirect, abort
 from werkzeug.security import generate_password_hash, check_password_hash
 from flask.ext.login import (LoginManager, current_user, login_required,
-                            login_user, logout_user, UserMixin, AnonymousUser,
+                            login_user, logout_user, UserMixin, AnonymousUserMixin,
                             confirm_login, fresh_login_required)
 from flaskext.bcrypt import Bcrypt
 

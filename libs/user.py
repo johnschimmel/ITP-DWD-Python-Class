@@ -4,7 +4,7 @@ import os
 from flask import Flask, session, request, url_for, escape, render_template, jsonify, flash, redirect
 from werkzeug.security import generate_password_hash, check_password_hash
 from flask.ext.login import (LoginManager, current_user, login_required,
-                            login_user, logout_user, UserMixin, AnonymousUser,
+                            login_user, logout_user, UserMixin, AnonymousUserMixin,
                             confirm_login, fresh_login_required)
 
 from mongoengine import *
@@ -71,5 +71,5 @@ class User(UserMixin):
        return self.active
 
 
-class Anonymous(AnonymousUser):
+class Anonymous(AnonymousUserMixin):
     name = u"Anonymous"
