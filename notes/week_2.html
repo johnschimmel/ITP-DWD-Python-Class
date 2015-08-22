@@ -1,0 +1,342 @@
+<!DOCTYPE html>
+<!--[if lt IE 7]>      <html class="no-js lt-ie9 lt-ie8 lt-ie7"> <![endif]-->
+<!--[if IE 7]>         <html class="no-js lt-ie9 lt-ie8"> <![endif]-->
+<!--[if IE 8]>         <html class="no-js lt-ie9"> <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js"> <!--<![endif]-->
+    <head>
+        
+   
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+        <title>Dynamic Web Development</title>
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width">
+        <link rel="stylesheet" href="http://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.0.0-rc2/css/bootstrap.min.css">
+        <style>body {
+                padding-top: 60px;
+                padding-bottom: 40px;
+            }
+        </style>
+        
+        <script src="http://cdnjs.cloudflare.com/ajax/libs/modernizr/2.6.2/modernizr.min.js"></script>
+        
+   <!-- (1) Optimize for mobile versions: http://goo.gl/EOpFl -->
+   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+   <!-- (1) force latest IE rendering engine: http://goo.gl/tf4JH -->
+   <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+
+   <!-- (1) Moot look and feel -->
+   <link rel="stylesheet" href="https://cdn.moot.it/1/moot.css">
+
+   <!-- (4) Custom CSS -->
+   <style>body {
+      font-family: "myriad pro", tahoma, verdana, arial, sans-serif;
+      margin: 0; padding: 0;
+   }
+
+   .moot {
+      font-size: 18px;
+   }
+   </style>
+
+    </head>
+  <body>
+
+        <!-- Fixed navbar -->
+    <div class="navbar navbar-inverse navbar-fixed-top">
+      <div class="container">
+        <div class="navbar-header">
+          <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+          </button>
+          <a class="navbar-brand" href="../index.html">ITP DWD Fall 2013</a>
+        </div>
+        <div class="navbar-collapse collapse">
+          <ul class="nav navbar-nav">
+            <li><a href="../page/quicknotes.html">Web Dev Cheatsheet</a></li>
+            <li><a href="../forum.html">Forum</a></li>
+            <li class="dropdown">
+              <a href="week_2.html#" class="dropdown-toggle" data-toggle="dropdown">Previous DWD Classes <b class="caret"></b></a>
+              <ul class="dropdown-menu">
+                <li><a href="http://itpwebclass.herokuapp.com/">NodeJS - Spring 2013</a></li>
+                <li><a href="http://itppyweb2012.herokuapp.com/">Python - Fall 2012</a></li>
+              </ul>
+            </li>
+          </ul>          
+        </div><!--/.nav-collapse -->
+      </div>
+    </div>
+
+    <div class="container">
+      
+      
+
+<br>
+<div class="page-header">
+	<h1>September 10<br>Week 2: Python Crash Course</h1>
+	<p class="lead">Python overview, variables, conditions, lists, dictionaries, loop and tabs.</p>
+</div>
+
+<div class="row">
+	<div class="col-md-2">
+		
+		<ul class="nav nav-pills nav-stacked">
+			<li class="active"><a href="week_2.html#notes">Class notes</a></li>
+			<li><a href="week_2.html#assignment">Assignment</a></li>
+			<li><a href="week_2.html#discussion">Discussion</a></li>
+		</ul>
+	</div>
+	<div class="col-md-10">
+
+		
+		<div id="notes">
+			<p><img alt="monty python" src="http://images.wikia.com/peel/images/a/a5/Monty_foot.jpg" /></p>
+<p>&nbsp;</p>
+<h2>Python</h2>
+<p>(derived from Monty Python)</p>
+<p>&nbsp;</p>
+<p>Variables</p>
+<ul>
+<li>Strings</li>
+<li>Int, float, long, complex</li>
+<li>Boolean</li>
+<li>Lists</li>
+<li>Dictionaries</li>
+<li>Tuples</li>
+<li>Objects</li>
+</ul>
+<h2>&nbsp;</h2>
+<h3>Basic variables</h3>
+<pre><code># a string
+name = "John Young"
+occupation = "Astronaut"
+
+# an integer
+age = 81
+
+# float
+days_in_space = 34.806
+
+# boolean
+walked_on_moon = True
+snuck_cornedbeef_into_gemini_capsule = True
+active_duty = False
+</code></pre>
+<hr />
+<h3>Data structure - organzing your data</h3>
+<h4>Lists</h4>
+<pre><code># list
+missions = ['Gemini 3','Gemini 10','Apollo 10','Apollo 16','STS-1']
+
+# add a mission
+missions.append('STS-9') # inserting STS-9 into missions list
+
+# access list item directly
+print missions[1] # prints the second mission 'Gemini 10'
+
+# get the length
+print len(missions), " travelled missions"  # print the number of missions
+</code></pre>
+<h4>Dictionaries</h4>
+<p>Just like associative arrays in PHP or hashlist in Java.</p>
+<p>Dictionary is a container for Keys and Values.</p>
+<pre><code># define dictionary and populate
+myDictionary = {}
+myDictionary['school'] = "ITP"
+myDictionary['year'] = 2013
+myDictionary['classes'] = ['DWD','Materials','Bicycles for the Mind','Puppets']
+
+# dictionary define/populate one statement
+mission_dates = {
+  'Gemini 3' : '23 March 1965',
+  'Gemini 10' : '18-21 July 1966',
+  'Apollo 10' : '18-26 May 1969',
+  'Apollo 16' : '16-27 April 1972 ',
+  'STS-1' : '12-14 April 1981',
+  'STS-9' : '28 November - 6 December 1983'
+}
+
+# retrieve mission
+print mission_dates['Apollo 16']
+
+# add to dictionary
+mission_dates['MARS1'] = '25 December 2023'
+
+# remove item from dictionary
+del mission_dates['MARS1']
+
+# retrieve the keys
+just_the_mission_names = mission_dates.keys()  # a list of mission name
+
+# retrieve the values
+just_the_mission_dates = mission_dates.values() # a list of mission dates
+</code></pre>
+<p>&nbsp;</p>
+<h4>Tuple - weirdo of the variables</h4>
+<p>Tuple is a data container, comma delimited list of variables between parentheses. Data can be retrieved in order.</p>
+<pre><code>favorite_color = ('Green','Brown','Orange')
+first, second, third = favorite_colors 
+print second # 'Brown'
+</code></pre>
+<p>&nbsp;</p>
+<pre><code># tuple
+# tuples are weird - you can organize the basic variable types in a comma delimited list
+# and retrieve them in that order
+military_rank = ("Captain","US Navy")
+rank, usforce = military_rank # rank = "Captain" and usforce = "US Navy"
+</code></pre>
+<h3>Objects</h3>
+<p>Organizing many items with similiar data structure and functions.</p>
+<pre><code># objects (classes)
+# use objects when you have a lot of things with similiar data structure and actions
+class Astronaut(object):
+
+  # __init__ automatically called when creating an object
+  def __init__(self, nameStr = None):
+    print "Creating new astronaut:", nameStr
+    self.name = nameStr
+
+  def set_name(self, nameStr):
+    self.name = nameStr
+
+mr_awesome = Astronaut("J. Young")
+mr_awesome.set_name("John Young")
+mr_awesome.age = 81 #dynamically set object property/variable
+
+print "This variable is :", type(mr_awesome)
+print "Name: %s" % mr_awesome.name  # this is string formatting %s is a placeholder for a string
+
+#print "%s is %d years old" % (mr_awesome.name, mr_awesome.age)
+print mr_awesome.name, "is", mr_awesome.age, "years old"
+</code></pre>
+<hr />
+<h2>Conditions and Loops</h2>
+<h3>If Elif &amp; Else</h3>
+<p>The basic IF statement</p>
+<pre><code>if 1 == 1:
+  print "Yes, 1 == 1"
+
+python_is_great = True
+if python_is_great is True:
+  print "Python is great!"
+</code></pre>
+<p>IF ELSE</p>
+<pre><code>name = "Tony Pony"
+
+if name == "Tony Pony":
+  print "Hello Tony Pony"
+else:
+  print "STRANGER DANGER!!"
+</code></pre>
+<p>IF ELIF and ELSE</p>
+<pre><code>name = "Tony Pony"
+
+if name == "Tanya Perry":
+  print "Hey Tanya"
+
+elif name  == "Tony Pony":
+  print "Still here Tony Pony?"
+
+else:
+  print "STRANGER DANGER!!"
+</code></pre>
+<h3>Loops</h3>
+<p>For loop will iterate through a List</p>
+<pre><code>missions = ['Gemini 3','Gemini 10','Apollo 10','Apollo 16','STS-1','STS-9']
+for m in missions:
+  print m
+</code></pre>
+<p>Iterating through a dictionary. Print out all keys.</p>
+<pre><code>mission_dates = {
+  'Gemini 3' : '23 March 1965',
+  'Gemini 10' : '18-21 July 1966',
+  'Apollo 10' : '18-26 May 1969',
+  'Apollo 16' : '16-27 April 1972 ',
+  'STS-1' : '12-14 April 1981',
+  'STS-9' : '28 November - 6 December 1983'
+}
+
+for m in mission_dates:
+  print m
+</code></pre>
+<p>Iterate through dictionary and print key and value</p>
+<pre><code>for name, date in mission_dates.items():
+  print name, "on", date
+</code></pre>
+<h2>Functions</h2>
+<p>Functions are repeatable operations in code.</p>
+<p>Python uses the <strong>def</strong> word to define a function. </p>
+<pre><code>def add_it_up(num1, num2):
+  return num1 + num2
+</code></pre>
+		</div>
+
+		<hr>
+		<a name="assignment"></a>
+		<div class="page-header" id="assignment">
+			<h3>Assignment</h3>
+			
+			
+			<div class="row">
+				<div class="col-md-10">
+					<h2>Project Idea Development</h2>
+<p>Come to class with two types of web based ideas for next week</p>
+<ul>
+<li>A platform for the ITP floor - is there data and communication that could be shared with the community in a more efficient or unique manner with the Internet involved.</li>
+<li>A personal broadcasting machine - what data are you not sharing yet on the Internet, why develop a system that will collect and broadcast.</li>
+<li>Create a data structure - using one of the ideas above, create a list or objects or dictionaries containing phony data.</li>
+</ul>
+				</div>
+			</div>
+
+		</div>
+		
+		<a name="discussion"></a>
+		<div class="page-header" id="discussion">
+			<h3>Discussion</h3>
+			
+		</div>
+		<div class="row">
+			<div class="col-md-8">
+				<a class="moot" data-show_online="true"
+				   href="https://moot.it/i/itpdwd/classnotes/week_2">
+				   Comments for this class topic.
+				</a>
+		        
+
+			</div>
+		</div>
+	</div>
+</div>
+
+
+      <hr>
+
+      <footer>
+        <p>Dynamic Web Development | John Schimmel | Interactive Telecommunications Program, NYU</p>
+      </footer>
+    </div> <!-- /container -->
+
+    
+	
+
+        <script src="http://cdnjs.cloudflare.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
+        <script src="http://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.0.0-rc2/js/bootstrap.min.js"></script>
+        <script src="../static/js/main.js"></script>
+        <script>
+          (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+          (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+          m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+          })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+          ga('create', 'UA-43580620-1', 'itppyweb.herokuapp.com');
+          ga('send', 'pageview');
+        </script>
+    
+  	<!-- (1) Moot client application -->
+   	<script src="https://cdn.moot.it/1/moot.min.js"></script>
+
+    </body>
+</html>

@@ -1,0 +1,530 @@
+<!DOCTYPE html>
+<!--[if lt IE 7]>      <html class="no-js lt-ie9 lt-ie8 lt-ie7"> <![endif]-->
+<!--[if IE 7]>         <html class="no-js lt-ie9 lt-ie8"> <![endif]-->
+<!--[if IE 8]>         <html class="no-js lt-ie9"> <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js"> <!--<![endif]-->
+    <head>
+        
+   
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+        <title>Dynamic Web Development</title>
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width">
+        <link rel="stylesheet" href="http://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.0.0-rc2/css/bootstrap.min.css">
+        <style>body {
+                padding-top: 60px;
+                padding-bottom: 40px;
+            }
+        </style>
+        
+        <script src="http://cdnjs.cloudflare.com/ajax/libs/modernizr/2.6.2/modernizr.min.js"></script>
+        
+   <!-- (1) Optimize for mobile versions: http://goo.gl/EOpFl -->
+   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+   <!-- (1) force latest IE rendering engine: http://goo.gl/tf4JH -->
+   <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+
+   <!-- (1) Moot look and feel -->
+   <link rel="stylesheet" href="https://cdn.moot.it/1/moot.css">
+
+   <!-- (4) Custom CSS -->
+   <style>body {
+      font-family: "myriad pro", tahoma, verdana, arial, sans-serif;
+      margin: 0; padding: 0;
+   }
+
+   .moot {
+      font-size: 18px;
+   }
+   </style>
+
+    </head>
+  <body>
+
+        <!-- Fixed navbar -->
+    <div class="navbar navbar-inverse navbar-fixed-top">
+      <div class="container">
+        <div class="navbar-header">
+          <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+          </button>
+          <a class="navbar-brand" href="../index.html">ITP DWD Fall 2013</a>
+        </div>
+        <div class="navbar-collapse collapse">
+          <ul class="nav navbar-nav">
+            <li><a href="../page/quicknotes.html">Web Dev Cheatsheet</a></li>
+            <li><a href="../forum.html">Forum</a></li>
+            <li class="dropdown">
+              <a href="week_3.html#" class="dropdown-toggle" data-toggle="dropdown">Previous DWD Classes <b class="caret"></b></a>
+              <ul class="dropdown-menu">
+                <li><a href="http://itpwebclass.herokuapp.com/">NodeJS - Spring 2013</a></li>
+                <li><a href="http://itppyweb2012.herokuapp.com/">Python - Fall 2012</a></li>
+              </ul>
+            </li>
+          </ul>          
+        </div><!--/.nav-collapse -->
+      </div>
+    </div>
+
+    <div class="container">
+      
+      
+
+<br>
+<div class="page-header">
+	<h1>September 17<br>Week 3: WWW! Introduction to Flask, Git and Heroku</h1>
+	<p class="lead">Getting our first web server set up and running. &#34;Hello World&#34; wide web literally.</p>
+</div>
+
+<div class="row">
+	<div class="col-md-2">
+		
+		<ul class="nav nav-pills nav-stacked">
+			<li class="active"><a href="week_3.html#notes">Class notes</a></li>
+			<li><a href="week_3.html#assignment">Assignment</a></li>
+			<li><a href="week_3.html#discussion">Discussion</a></li>
+		</ul>
+	</div>
+	<div class="col-md-10">
+
+		
+		<div id="notes">
+			<div class="panel-group" id="accordion">
+  <div class="panel panel-default">
+    <div class="panel-heading">
+      <h4 class="panel-title">
+        <a class="accordion-toggle" data-toggle="collapse" data-parent="#accordion" href="week_3.html#webservers">
+          Web servers
+        </a>
+      </h4>
+    </div>
+    <div id="webservers" class="panel-collapse collapse in">
+        <div class="panel-body">
+          <h2>Topics for today</h2>
+          <ul>
+          <li>Web servers</li>
+          <li>Running a basic webserver with Flask, a Python web framework.</li>
+          <li>Using GIT for code version control and deployment.</li>
+          <li>Heroku, getting set up and launching a simple web site.</li>
+          </ul>
+          <h3>Web Servers</h3>
+          <ul>
+          <li>First created in 1990 by Tim Berners-Lee at CERN called CERN httpd.</li>
+          <li>Binding to an IP address it can serve up requests from clients.<ul>
+          <li>Requests can be a webpage, data, a file or form submissions.</li>
+          <li>Clients can be web browsers, desktop or mobile applications and other servers.</li>
+          </ul>
+          </li>
+          <li>A response will be given for each request <ul>
+          <li>HTML, json, xml will provide the content.</li>
+          <li>Status codes (200, 404, 500) and headers will give the meta details for a response</li>
+          </ul>
+          </li>
+          <li>The server is a piece of code, an application running written in a variety of languages.</li>
+          <li>For the web server to take requests from the Internet it must a have an IP address, the server code will bind its request serving operations to an open port (like a doorway for data).</li>
+          </ul>
+          <p><img alt="Tim Berners-Lee and Robert Cailliau stand next to the 1st web server" src="http://nimg.sulekha.com/others/thumbnailfull/tim-berners-lee-robert-cailliau-2009-3-13-11-1-53.jpg" /></p>
+          <p>Tim Berners-Lee and Robert Cailliau stand next to the 1st web server <a href="http://newshopper.sulekha.com/tim-berners-lee-robert-cailliau_photo_714853.htm">source</a></p>
+        </div>
+    </div>
+  </div>
+  <div class="panel panel-default">
+    <div class="panel-heading">
+      <h4 class="panel-title">
+        <a class="accordion-toggle" data-toggle="collapse" data-parent="#accordion" href="week_3.html#introflask">
+          Running basic web server with Flask (python framework)
+        </a>
+      </h4>
+    </div>
+    <div id="introflask" class="panel-collapse collapse">
+      <div class="panel-body">
+
+        <h3 id="flask-a-micro-python-web-framework">Flask, a micro Python web framework</h3>
+        <p>Flask is a web framework written in Python. The Flask framework provides methods to receive and respond to HTTP requests, static files, templates, sessions and a place to manage your code.</p>
+        <h3 id="simple-web-server-w-flask">Simple web server w/ Flask.</h3>
+        <p>Reference Links</p>
+        <ul>
+        <li>Flask - micro web framework <a href="http://flask.pocoo.org">http://flask.pocoo.org</a></li>
+        </ul>
+        <p>Requirements</p>
+        <ul>
+        <li>Tested on Python 2.7.x</li>
+        <li>You should have Python, Python Setuptools and PIP installed (run cmd "easy_install pip").</li>
+        </ul>
+        <h3 id="installing-flask-method-1">Installing Flask (method #1)</h3>
+        <p>Before you run the simple server example below you must install the Flask module. Flask is the Python framework used in this example web server.</p>
+        <p>To install Flask run the following command in your Terminal console.</p>
+        <pre><code>pip install flask
+        </code></pre>
+        <p>This will download Flask and all of its requirements (Werkzeug &amp; Jinja2)</p>
+        <p>For this example you only need to install Flask once. It will then be available for all future Python scripts that import it.</p>
+        <p><strong> NOTE: future web servers in the ITP DWD class will be running with Virtualenv, to encapsulate all required modules/libraries. The ITP DWD class will be installing with PIP with an alternative command. </strong></p>
+        <hr>
+        <h3 id="running-the-basic-server">Running the basic server</h3>
+        <h4 id="download-code-for-webpy">Download <a href="https://gist.github.com/johnschimmel/6592908">code for web.py</a></h4>
+        <script src="https://gist.github.com/johnschimmel/6592908.js"></script>
+
+        <h3 id="download-the-code">Download the code</h3>
+        <p>Download the code. To keep your code organized it helps to put example files in their own directory, creating a directory in ~/Documents called <strong>'itp-dwd-examples'</strong> is helpful.</p>
+        <p>Navigate to the directory via Terminal, for example</p>
+        <pre><code>cd ~/Documents/itp-dwd-examples
+        </code></pre>
+        <h3 id="run-the-server">Run the server</h3>
+        <p>When you are inside the code directiory, run the server with the command</p>
+        <pre><code>python web.py
+        </code></pre>
+        <p>If successful, a simple web server is now running on your computer. Open your browser and visit <a href="http://localhost:5000">http://localhost:5000</a></p>
+        <p>Two pages are available from this example,</p>
+        <ul>
+        <li><a href="http://localhost:5000">http://localhost:5000</a> - the main page</li>
+        <li><a href="http://localhost:5000/page2">http://localhost:5000/page2</a>- a second example page</li>
+        </ul>
+        <hr>
+        <p>Inside the code
+        There are four things happening in this code</p>
+        <ol>
+        <li>
+        <p>Importing modules. The <strong>import</strong> and <strong>from</strong> keyword commands tell the script to include certain code libraries (<a href="http://learnpythonthehardway.org/book/ex40.html">understanding imports</a> see an example from Learn Python the Hard Way).</p>
+        <pre><code>import os   # import the operating system module
+        from flask import Flask     # Retrieve Flask, our framework
+        </code></pre>
+        </li>
+        <li>
+        <p>Create the Flask app</p>
+        <pre><code>app = Flask(__name__)   
+        # __name__ is a Python variable that holds the name of the module, currently it is '__main__'
+        </code></pre>
+        </li>
+        <li>
+        <p>Routes. Routes provide a resource path for your clients to access. In Flask, routes are configured with the use of Python decorators (read more about decorators). The decorate is prefixed with @ symbol and it will "wrap" the Python function directly below itself.</p>
+        <pre><code># Main Page Route
+        @app.route("/")
+        def index():
+            return "Hello World!&lt;br/&gt;&lt;br/&gt;&lt;a href='/page2'&gt;Visit page #2&lt;/a&gt;"
+
+        # Second Page Route
+        @app.route("/page2")
+        def page2():
+            return """&lt;html&gt;&lt;body&gt;
+            &lt;h2&gt;Welcome to page 2&lt;/h2&gt;
+            &lt;p&gt;This is just amazing!&lt;/p&gt;
+            &lt;/body&gt;&lt;/html&gt;"""
+        </code></pre>
+        </li>
+        <li>
+        <p>Start the server. If the <strong> name </strong> of the module is '<strong>main</strong>', this script is not being imported by another, turn on debug mode and turn on the server.</p>
+        <pre><code>if __name__ == "__main__":
+            app.debug = True    # enables auto restarting of server when code changes
+            app.run()   # turns server on, ready for request.
+        </code></pre>
+        </li>
+        </ol>
+        <p>Running the script will turn on the server and allow it to accept requests.</p>
+        <h3 id="stopping-the-server">Stopping the server</h3>
+        <p>You can stop the server by pressing the CTRL+C keys inside the Terminal.</p>
+        <hr>
+        <h2 id="running-the-second-web-server-example">Running the second web server example</h2>
+        <h3 id="download-code-for-web_w_formpyhttpsgistgithubcomjohnschimmel6593088">Download code for web_w_form.py](https://gist.github.com/johnschimmel/6593088)</h3>
+        <script src="https://gist.github.com/johnschimmel/6593088.js"></script>
+
+
+        <ul>
+        <li>
+        <p>The second web server example has a third page that demonstrates a simple web form. When the server receives a 'GET' request to '/form' it responds with a form. </p>
+        </li>
+        <li>
+        <p>If the user fills in the form and submits the server receives a 'POST' request with the form data. The server responds with a custom made HTML string using the user form data.</p>
+        </li>
+        <li>
+        <p><strong>/form</strong> - to display a simple web form and a receive form submission.</p>
+        </li>
+        </ul>
+        <h3 id="run-the-server-with-the-command">Run the server with the command</h3>
+        <pre><code>python web_w_form.py
+        </code></pre>
+        <p>If successful, a simple web server is now running on your computer. Open your browser and visit <a href="http://localhost:5000">http://localhost:5000</a></p>
+        <h3 id="inside-the-form-route">Inside the '/form' route</h3>
+        <ol>
+        <li>
+        <p>Route has 2nd argument to define acceptable HTTP request methods. By default Flask only provides 'GET'. We have the option to use 'GET','POST','PUT','DELETE'. We will usually be using only 'GET' and 'POST'</p>
+        <pre><code>@app.route("/form", methods=["GET","POST"])
+        </code></pre>
+        </li>
+        <li>
+        <p>'GET' or 'POST'</p>
+        <pre><code>def simpleform():
+
+            # Did the client make a POST request?
+            if request.method == "POST":
+
+                # get the form data submitted and store it in a variable
+                user_name = request.form.get('user_name', 'Tim Berners-Lee')
+
+                # return custom HTML using the user submitted data
+                return "&lt;html&gt;&lt;body&gt;&lt;h2&gt;HELLO %s! What an interesting name.&lt;/h2&gt;&lt;br&gt;&lt;a href='/form'&gt;back to form&lt;/a&gt;&lt;/body&gt;&lt;html&gt;" % user_name
+
+            else:
+
+                # client made a GET request for '/form'
+                # return a simple HTML form that POSTs to itself
+                return """&lt;html&gt;&lt;body&gt;
+                &lt;form action="/form" method="POST"&gt;
+                    What's your name? &lt;input type="text" name="user_name" id="user_name"/&gt;
+                    &lt;input type="submit" value="submit it"/&gt;
+                &lt;/form&gt;
+                &lt;/body&gt;&lt;/html&gt;"""
+        </code></pre>
+        </li>
+        </ol>
+
+</div>
+
+<p></div>
+  </div>
+  <div class="panel panel-default">
+    <div class="panel-heading">
+      <h4 class="panel-title">
+        <a class="accordion-toggle" data-toggle="collapse" data-parent="#accordion" href="week_3.html#heroku">
+          Preparing web app for Heroku
+        </a>
+      </h4>
+    </div>
+    <div id="heroku" class="panel-collapse collapse">
+      <div class="panel-body">
+        <a href="https://github.com/johnschimmel/ITP-DWD-Fall2013-Week3-First-Server">https://github.com/johnschimmel/ITP-DWD-Fall2013-Week3-First-Server</a></p>
+<h2 id="getting-a-simple-server-running-on-heroku">Getting a simple server running on Heroku</h2>
+
+<h3 id="quick-start-with-heroku">Quick start with Heroku:</h3>
+
+<ul>
+<li>Sign up for Heroku <a href="https://api.heroku.com/signup">https://api.heroku.com/signup</a></li>
+<li>Download and install Heroku Toolbelt <a href="https://toolbelt.heroku.com/">https://toolbelt.heroku.com/</a></li>
+</ul>
+
+<p><hr />
+<h3 id="getting-the-web-server-to-run-locally-on-your-computer">Getting the web server to run locally on your computer</h3>
+<p>Download example web server and Heroku files (get the ZIP) <a href="https://github.com/johnschimmel/ITP-DWD-Fall2013-Week3-First-Server">https://github.com/johnschimmel/ITP-DWD-Fall2013-Week3-First-Server</a></p>
+<h4 id="set-up-local-code-environment-with-virtualenv">Set up local code environment with Virtualenv</h4>
+<ul>
+<li>Put the Heroku simple server code in a directory</li>
+<li>With Terminal, navigate to the code directory</li>
+</ul>
+<p>Python can help organize your code modules, keeping them separate from existing Python modules with Virtualenv (virtual environment). We installed Virtualenv on week 1 with the command,</p>
+<pre><code>easy_install virtualenv
+</code></pre>
+<p>We also installed PIP</p>
+<pre><code>easy_install pip
+</code></pre>
+<p>Virtualenv will organize all your modules and even download new requested packages and updates. When activated, Virtualenv will supply the modules needed for an application.</p>
+<h4 id="create-a-virtual-environment">Create a virtual environment</h4>
+<p>Inside your code directory, run the command</p>
+<pre><code>virtualenv venv
+</code></pre>
+<p>We are telling Virtualenv to create a new directory called <strong>venv</strong> to manage our packages.</p>
+<h4 id="turn-on-the-virtualenv">Turn on the Virtualenv</h4>
+<p>Once created we need to turn on the virtual environment, telling the computer to use the venv as a source for all packages.</p>
+<pre><code>. venv/bin/activate
+</code></pre>
+<p>The '.' is an execution command, saying "Hey, run the 'activate' program inside /venv/bin directory".</p>
+<h4 id="install-requirements-with-pip">Install Requirements with PIP</h4>
+<p>There is a file <strong>requirements.txt</strong> that lists all the packages we need to run the web server. Earlier we imported Flask manually but now we will import Flask via PIP's alternative method.</p>
+<p>requirements.txt</p>
+<pre><code>Flask==0.10
+</code></pre>
+<p>Currently there is only one package requested, Flask version 0.10.</p>
+<p>To install the required packages run the command,</p>
+<pre><code>pip install -r requirements.txt
+</code></pre>
+<p>PIP installs all requested requirements and it also downloads all of their dependencies (werkzeug and jinja2).</p>
+<h4 id="run-web-server-locally">Run web server locally</h4>
+<p>With all the requirements installed let's turn on the server,</p>
+<pre><code>python app.py
+</code></pre>
+<p>Stop the server with <strong>CTRL+C</strong> inside the Terminal window.</p>
+<p>Alternatively, we can use a new command to turn on the server. The Heroku Toolbelt installed Foreman, a helper utility for running applications. Run the command,</p>
+<pre><code>foreman start
+</code></pre>
+<p>Foreman is the command we will be using for the rest of the semester. Foreman uses the file <strong>Procfile</strong> to know what to turn on. There is a single line inside <strong>Procfile</strong>,</p>
+<pre><code>web: python app.py
+</code></pre>
+<p>The <strong>Procfile</strong> will be pushed to Heroku, it tells Heroku where are main web server script is located, app.py. It also declares we're using Python.</p>
+<p>&nbsp;</p>
+<p>The web server code is almost identical to the simple server with form at the top of this page, the only difference is in the very last line where we add some arguments to the app.run() command to allow Heroku to select the port address for the server.</p>
+<p>&nbsp;</p>
+<pre><code>if <strong>name</strong> == "<strong>main</strong>":<br /> app.debug = True<br /> <br /> port = int(os.environ.get('PORT', 5000)) # locally PORT 5000, Heroku will assign its own port<br /> app.run(host='0.0.0.0', port=port)</code></pre></p>
+<p></div>
+</div>
+</div>
+<div class="panel panel-default">
+<div class="panel-heading">
+<h4 class="panel-title">
+<a class="accordion-toggle" data-toggle="collapse" data-parent="#accordion" href="week_3.html#getgit">
+  Getting started with GIT
+</a>
+</h4>
+</div>
+<div id="getgit" class="panel-collapse collapse">
+<div class="panel-body">
+<h3 id="getting-going-with-git">Getting Going with GIT</h3>
+<p>In Terminal, navigate to your code folder. Let's initialize this folder as a Git repository. This will enable us to keep track of all code changes and allow us to eventually PUSH code to Heroku.</p>
+<p>Before we set up the Git repo, let's look inside the .gitignore file. This file will tell Git to ignore certain files and folders. These could be files that are not required for your code history or they might include private and sensitive information like passwords.</p>
+<h4 id="gitignore">.gitignore</h4>
+<pre><code>.DS_Store
+venv
+<em>.pyc
+</code></pre>
+<p>We will ignore the venv folder (coming up soon) and any compiled Python files (</em>.pyc). Also OS X likes to create a .DS_Store file to manange its directories, let's ignore this too.</p>
+<h4 id="initialize-directory-as-git-repository">Initialize directory as GIT repository</h4>
+<p>You only need to do this once per directory. Inside the code directory using Terminal run the command</p>
+<pre><code>git init
+</code></pre>
+<p>This creates a hidden .git directory to manage all changes with your code</p>
+<h4 id="adding-files-to-git">Adding files to GIT</h4>
+<p>First time you intialize and for each new file you add to your repository you must add the file to the Git repo. Run this command</p>
+<pre><code>git add .
+</code></pre>
+<p>The '.' is a wildcard and adds all files and folders (excluding those listed inside the .gitignore file).</p>
+<h4 id="commit-your-code">Commit your code</h4>
+<p>To create a snapshot in time of your code, run the following command,</p>
+<pre><code>git commit -am "This is my update, I added some files."
+</code></pre>
+      </div>
+    </div>
+  </div>
+  <div class="panel panel-default">
+    <div class="panel-heading">
+      <h4 class="panel-title">
+        <a class="accordion-toggle" data-toggle="collapse" data-parent="#accordion" href="week_3.html#pushheroku">
+          Push your web app to Heroku
+        </a>
+      </h4>
+    </div>
+    <div id="pushheroku" class="panel-collapse collapse">
+      <div class="panel-body">
+<h3 id="push-to-heroku">Push to Heroku</h3>
+<p>With your code committed you're ready to use Heroku</p>
+<h4 id="verify-you-are-logged-into-heroku">Verify you are logged into Heroku</h4>
+<p>You will usually only need to do this once...usually. Heroku rarely logs you out but you might use it if you have multiple Heroku accounts you are managing, like one for work and one for personal use.</p>
+<pre><code>heroku login
+</code></pre>
+<p>Log in with your email and password used when registering at <a href="https://api.heroku.com/signup">https://api.heroku.com/signup</a></p>
+<h4 id="create-a-new-heroku-app">Create a new Heroku app</h4>
+<p>This command is only run once, usually. &nbsp;When you have a code directory ready to deploy to a new Heroku app run this command once to create a new app on Heroku.&nbsp;</p>
+<pre><code>heroku create
+</code></pre>
+<p>Heroku will respond with a crazy looking domain name. Heroku also added a new GIT remote path to you Heroku repository. Look at your GIT remote paths run the command,</p>
+<pre><code>git remote -v
+</code></pre>
+<h4 id="push-your-code-to-heroku">Push your code to Heroku</h4>
+<p>Ready? Deploy your new server on Heroku by <strong>push</strong>ing your code to Heroku. This is uploading all code and commit history to Heroku.</p>
+<p>This command you will use often when pushing your new and modified local code to Heroku.</p>
+<pre><code>git push heroku master
+</code></pre>
+<p>Heroku will install all Python dependencies (requirements.txt) and turn on your web server using the Procfile provided.</p>
+<h4 id="open-and-view-your-server">Open and view your server</h4>
+<pre><code>heroku open</code></pre>
+      </div>
+    </div>
+  </div>
+</div></p>
+		</div>
+
+		<hr>
+		<a name="assignment"></a>
+		<div class="page-header" id="assignment">
+			<h3>Assignment</h3>
+			
+			
+			<div class="row">
+				<div class="col-md-10">
+					<p>1) This week you should focus on getting the sample Python Flask web server running. Use the example web server repo to get started, <a href="https://github.com/johnschimmel/ITP-DWD-Fall2013-Week3-First-Server">https://github.com/johnschimmel/ITP-DWD-Fall2013-Week3-First-Server</a></p>
+<p>2) Customize the web server to include new routes and content. </p>
+<p>3) Push your customized web server to Heroku. </p>
+<p>4) Post your heroku url in the assignment area below</p>
+<p>Some tips...</p>
+<h3>To start your server</h3>
+<ul>
+<li>Navigate to your code directory in terminal</li>
+<li>
+<p>activate your virtualenv</p>
+<pre><code>. venv/bin/activate
+</code></pre>
+</li>
+<li>
+<p>Turn on the server</p>
+<pre><code>foreman start
+</code></pre>
+</li>
+<li>
+<p>Stop your server, press <strong>CTRL+C</strong> in your Terminal window</p>
+</li>
+</ul>
+<h3>Push to Heroku</h3>
+<p>After you have updated your code, </p>
+<ul>
+<li>
+<p>Commit it</p>
+<pre><code>git commit -am "i changed stuff"
+</code></pre>
+</li>
+<li>
+<p>Push it</p>
+<pre><code>git push heroku master
+</code></pre>
+</li>
+</ul>
+				</div>
+			</div>
+
+		</div>
+		
+		<a name="discussion"></a>
+		<div class="page-header" id="discussion">
+			<h3>Discussion</h3>
+			
+		</div>
+		<div class="row">
+			<div class="col-md-8">
+				<a class="moot" data-show_online="true"
+				   href="https://moot.it/i/itpdwd/classnotes/week_3">
+				   Comments for this class topic.
+				</a>
+		        
+
+			</div>
+		</div>
+	</div>
+</div>
+
+
+      <hr>
+
+      <footer>
+        <p>Dynamic Web Development | John Schimmel | Interactive Telecommunications Program, NYU</p>
+      </footer>
+    </div> <!-- /container -->
+
+    
+	
+
+        <script src="http://cdnjs.cloudflare.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
+        <script src="http://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.0.0-rc2/js/bootstrap.min.js"></script>
+        <script src="../static/js/main.js"></script>
+        <script>
+          (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+          (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+          m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+          })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+          ga('create', 'UA-43580620-1', 'itppyweb.herokuapp.com');
+          ga('send', 'pageview');
+        </script>
+    
+  	<!-- (1) Moot client application -->
+   	<script src="https://cdn.moot.it/1/moot.min.js"></script>
+
+    </body>
+</html>

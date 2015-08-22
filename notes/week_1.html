@@ -1,0 +1,273 @@
+<!DOCTYPE html>
+<!--[if lt IE 7]>      <html class="no-js lt-ie9 lt-ie8 lt-ie7"> <![endif]-->
+<!--[if IE 7]>         <html class="no-js lt-ie9 lt-ie8"> <![endif]-->
+<!--[if IE 8]>         <html class="no-js lt-ie9"> <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js"> <!--<![endif]-->
+    <head>
+        
+   
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+        <title>Dynamic Web Development</title>
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width">
+        <link rel="stylesheet" href="http://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.0.0-rc2/css/bootstrap.min.css">
+        <style>body {
+                padding-top: 60px;
+                padding-bottom: 40px;
+            }
+        </style>
+        
+        <script src="http://cdnjs.cloudflare.com/ajax/libs/modernizr/2.6.2/modernizr.min.js"></script>
+        
+   <!-- (1) Optimize for mobile versions: http://goo.gl/EOpFl -->
+   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+   <!-- (1) force latest IE rendering engine: http://goo.gl/tf4JH -->
+   <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+
+   <!-- (1) Moot look and feel -->
+   <link rel="stylesheet" href="https://cdn.moot.it/1/moot.css">
+
+   <!-- (4) Custom CSS -->
+   <style>body {
+      font-family: "myriad pro", tahoma, verdana, arial, sans-serif;
+      margin: 0; padding: 0;
+   }
+
+   .moot {
+      font-size: 18px;
+   }
+   </style>
+
+    </head>
+  <body>
+
+        <!-- Fixed navbar -->
+    <div class="navbar navbar-inverse navbar-fixed-top">
+      <div class="container">
+        <div class="navbar-header">
+          <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+          </button>
+          <a class="navbar-brand" href="../index.html">ITP DWD Fall 2013</a>
+        </div>
+        <div class="navbar-collapse collapse">
+          <ul class="nav navbar-nav">
+            <li><a href="../page/quicknotes.html">Web Dev Cheatsheet</a></li>
+            <li><a href="../forum.html">Forum</a></li>
+            <li class="dropdown">
+              <a href="week_1.html#" class="dropdown-toggle" data-toggle="dropdown">Previous DWD Classes <b class="caret"></b></a>
+              <ul class="dropdown-menu">
+                <li><a href="http://itpwebclass.herokuapp.com/">NodeJS - Spring 2013</a></li>
+                <li><a href="http://itppyweb2012.herokuapp.com/">Python - Fall 2012</a></li>
+              </ul>
+            </li>
+          </ul>          
+        </div><!--/.nav-collapse -->
+      </div>
+    </div>
+
+    <div class="container">
+      
+      
+
+<br>
+<div class="page-header">
+	<h1>September 03<br>Week 1: Introduction to web development</h1>
+	<p class="lead">Introduction to web servers. Semester overview. Getting environments set up.</p>
+</div>
+
+<div class="row">
+	<div class="col-md-2">
+		
+		<ul class="nav nav-pills nav-stacked">
+			<li class="active"><a href="week_1.html#notes">Class notes</a></li>
+			<li><a href="week_1.html#assignment">Assignment</a></li>
+			<li><a href="week_1.html#discussion">Discussion</a></li>
+		</ul>
+	</div>
+	<div class="col-md-10">
+
+		
+		<div id="notes">
+			<h1>Intro to Web Development</h1>
+<p>Web development is a general term for implementing a web site including web design, content creation, server configuration and programming. In this class we will explore web programming in its current state with open source tools and code and methods to serve and collect data from users.</p>
+<p>Web programming is a two-sided operation including servers and clients.</p>
+<h3>Clients&nbsp;- making requests (mainly)</h3>
+<p>On the client-side, we are usually referring to a web browser. Typical usage, a user makes a request from their browser. The user's request goes out on the Internet to find a specific server and make a specific request to that server. A web server returns the appropriate content or information which is rendered into a structured visual web page by the browser.</p>
+<p>Besides web browsers, a web client is any device or application that communicates with a web server. A Processing sketch or Arduino may be set up as clients to request the latest weather from Yahoo. The new wifi bathroom scales and thermostats are web clients as well, sending user data to a web server for later use. Best guess 99% of mobile phone application that require an Internet connection are connecting to a web server, they too are web clients.</p>
+<p>Web clients usually expect to receive content from the web server in a specific format, browsers expect HTML, Instant messenger applications likely expect XML, many mobile phone applications expect JSON. It is up to the web client developer to decide on which format they require as a response from the web server.</p>
+<h3>Servers - accepting requests / return 'stuff'</h3>
+<p>A server is usually thought of as a powerful computer serving 1,000’s of user connections, but it is code that turns a powerful computer into a server. A server can be anything that is capable of running a piece of software to accept incoming connections from remote computers (or incoming requests from other applications). &nbsp;Arduinos can become servers with an Ethernet of Wifi Shield. iPhones and Android can also run code to act as a server.</p>
+<p>The web server is specifically designed to accept HTTP requests and return appropriate responses, HTML, XML, JSON and even file mime type .gif, .jpg, .mp4.</p>
+<p>There are a variety of web servers, Apache popular in the PHP community. Servers are created in many programming languages too, Ruby, Python, Java and more recently JavaScript. A typical server will be a piece of code, or script that opens a socket. This socket acts like a doorway, allowing clients to request access to content and resources.</p>
+<h2>The things web pages are made of...</h2>
+<ul>
+<li>HTML</li>
+<li>CSS</li>
+<li>JavaScript</li>
+<li>Images, Video&nbsp;and media</li>
+</ul>
+<h3>Python</h3>
+<p>Speaking personally, Python is one of my 2 favorite programming languages, the other being JavaScript.  Python is nice to write, easy to read and kind to you if your codes breaks (well, kind enough).</p>
+<p>Throughout the semester you'll get a sample of Python through code examples used in class and a chance to write your own with the assignments.  Python's variables, lists (arrays), dictionaries (associative arrays) and classes are simple to learn and look very similar to other languages. The control syntax, if/else same as everywhere else. For-in loops and iterators are so nice you'll wish your other programming languages had them.</p>
+<p>We'll be using a Python web framework called&nbsp;<a href="http://flask.pocoo.org/">Flask</a> (starting on week 3) for our web applications. It's very similar to Ruby's Sinatra and NodeJS's ExpressJS.  Flask will let us create web servers in Python that can receive requests and return dynamic responses of HTML and JSON and static responses for images, css and javascript.</p>
+<h3>MongoDB</h3>
+<p>For our database, to save and retrieve data for our web applications we will use MongoDB, a document based database. It's popular for its schema-less, large scaling needs. &nbsp;For us, it is the perfect tool to quickly save user submitted ( or sensor submitted) data.&nbsp;</p>
+<h3>Heroku</h3>
+<p>For our web server we will use Heroku - a popular, free development cloud based web application hosting environment. &nbsp;We will use GIT to push our code from our local computers to Heroku where it will the web application will be turned on and available to anyone on the Internet...in a matter of minutes.</p>
+<hr />
+<h2>Tools you'll need for class</h2>
+<ul>
+<li>
+<p><strong>Web Browser</strong>, I suggest using&nbsp;a WebKit based&nbsp;browser</p>
+<ul>
+<li><a href="https://www.google.com/landing/chrome/beta/">Chrome</a>&nbsp;(suggested)</li>
+<li>Safari</li>
+<li>Firefox*   </li>
+</ul>
+</li>
+<li>
+<p><strong>Text editor</strong></p>
+<ul>
+<li><a href="http://www.sublimetext.com/">Sublime Text</a>&nbsp;(suggested)</li>
+<li><a href="http://macromates.com/">TextMate</a></li>
+<li>TextWrangler or&nbsp;Coda*   <strong>Terminal&nbsp;</strong>( OS X and Linux all have Terminals, I think there are Applications for Windows )</li>
+</ul>
+</li>
+<li>
+<p><span>Getting to know your command line interface -&nbsp;<a href="http://acad.coloradocollege.edu/dept/pc/SciCompLab/UnixTutorial/">basic unix commands</a></span></p>
+</li>
+<li>We'll use the Terminal for putting our code in version control (GIT) and also pushing new changes to our web server (Heroku)*   <strong>Software</strong></li>
+</ul>
+<hr />
+<h2>Setting up Python &amp; Development&nbsp;Tools</h2>
+<p>&nbsp;</p>
+<h3>Install Python 2.7.5</h3>
+<p>Download and install latest <strong>Python</strong> (currently 2.7.5) <strong>DO NOT DOWNLOAD Python 3.x</strong>
+<a href="http://python.org/getit/releases/2.7.5/">http://python.org/getit/releases/2.7.5/</a></p>
+<ul>
+<li>Download the version for your operating system.</li>
+<li>Open and click on the Python install package, it will install like a normal application.2.  (FOR OS X) Update any existing Python command&nbsp;to the use latest (just installed) version.</li>
+<li>On OS X, open your /Applications folder. Open the Python 2.7 folder. Double click on Update Shell Profile.command. This will allow your to access Python via the Terminal command 'python'.</li>
+</ul>
+<h3>Download &amp; Install Python SetupTools</h3>
+<p><a href="https://pypi.python.org/pypi/setuptools/1.1">https://pypi.python.org/pypi/setuptools/1.1</a></p>
+<p>Setuptools installs 'easy_install' command line tool - it's easy like the name says.</p>
+<p><strong>For OSX, here's the easy way</strong></p>
+<p>Run this command in your Terminal application, it will download ez_setup.py and install it with Python</p>
+<pre><code>curl https://bitbucket.org/pypa/setuptools/raw/bootstrap/ez_setup.py | python
+</code></pre>
+<p>When SetupTools have finished installing, download and install <strong>PIP</strong> and <strong>VirtualENV</strong> (it's easy now)</p>
+<h3>Install PIP and VirtualENV</h3>
+<ol>
+<li>
+<p>Install <strong>PIP</strong></p>
+<p>In Terminal run the following command</p>
+<pre><code>easy_install pip
+</code></pre>
+<p>Check to see if installed, run the following command in Terminal. You should see a version number.</p>
+<pre><code>pip -V
+</code></pre>
+</li>
+<li>
+<p>Install <strong>VirtualENV</strong></p>
+<pre><code>easy_install virtualenv
+</code></pre>
+<p>Check to see if installed, run the following command in Terminal</p>
+<pre><code>virtualenv
+</code></pre>
+</li>
+</ol>
+		</div>
+
+		<hr>
+		<a name="assignment"></a>
+		<div class="page-header" id="assignment">
+			<h3>Assignment</h3>
+			
+			
+			<div class="row">
+				<div class="col-md-10">
+					<ul>
+<li>
+<p>Setup your Python development environment</p>
+<ul>
+<li>Install Python</li>
+<li>Python Setuptools</li>
+</ul>
+</li>
+<li>
+<p>With Setuptools installed run the following commands to install PIP and Virtualenv</p>
+<ul>
+<li>easy_install pip</li>
+<li>easy_install virtualenv</li>
+</ul>
+</li>
+<li>
+<p>Install good browser (Chrome, Safari, Firefox)</p>
+</li>
+<li>Install good text editor (Sublime Text 2, TextMate, TextWrangler, Coda)</li>
+<li>Review Python lessons on <a href="http://learnpythonthehardway.org/book/">http://learnpythonthehardway.org/book/</a></li>
+<li>Focus on Exercises:<ul>
+<li>1-9</li>
+<li>18,19,21</li>
+<li>27-34</li>
+<li>37-40</li>
+</ul>
+</li>
+</ul>
+				</div>
+			</div>
+
+		</div>
+		
+		<a name="discussion"></a>
+		<div class="page-header" id="discussion">
+			<h3>Discussion</h3>
+			
+		</div>
+		<div class="row">
+			<div class="col-md-8">
+				<a class="moot" data-show_online="true"
+				   href="https://moot.it/i/itpdwd/classnotes/week_1">
+				   Comments for this class topic.
+				</a>
+		        
+
+			</div>
+		</div>
+	</div>
+</div>
+
+
+      <hr>
+
+      <footer>
+        <p>Dynamic Web Development | John Schimmel | Interactive Telecommunications Program, NYU</p>
+      </footer>
+    </div> <!-- /container -->
+
+    
+	
+
+        <script src="http://cdnjs.cloudflare.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
+        <script src="http://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.0.0-rc2/js/bootstrap.min.js"></script>
+        <script src="../static/js/main.js"></script>
+        <script>
+          (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+          (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+          m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+          })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+          ga('create', 'UA-43580620-1', 'itppyweb.herokuapp.com');
+          ga('send', 'pageview');
+        </script>
+    
+  	<!-- (1) Moot client application -->
+   	<script src="https://cdn.moot.it/1/moot.min.js"></script>
+
+    </body>
+</html>

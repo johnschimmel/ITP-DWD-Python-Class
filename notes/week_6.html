@@ -1,0 +1,362 @@
+<!DOCTYPE html>
+<!--[if lt IE 7]>      <html class="no-js lt-ie9 lt-ie8 lt-ie7"> <![endif]-->
+<!--[if IE 7]>         <html class="no-js lt-ie9 lt-ie8"> <![endif]-->
+<!--[if IE 8]>         <html class="no-js lt-ie9"> <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js"> <!--<![endif]-->
+    <head>
+        
+   
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+        <title>Dynamic Web Development</title>
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width">
+        <link rel="stylesheet" href="http://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.0.0-rc2/css/bootstrap.min.css">
+        <style>body {
+                padding-top: 60px;
+                padding-bottom: 40px;
+            }
+        </style>
+        
+        <script src="http://cdnjs.cloudflare.com/ajax/libs/modernizr/2.6.2/modernizr.min.js"></script>
+        
+   <!-- (1) Optimize for mobile versions: http://goo.gl/EOpFl -->
+   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+   <!-- (1) force latest IE rendering engine: http://goo.gl/tf4JH -->
+   <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+
+   <!-- (1) Moot look and feel -->
+   <link rel="stylesheet" href="https://cdn.moot.it/1/moot.css">
+
+   <!-- (4) Custom CSS -->
+   <style>body {
+      font-family: "myriad pro", tahoma, verdana, arial, sans-serif;
+      margin: 0; padding: 0;
+   }
+
+   .moot {
+      font-size: 18px;
+   }
+   </style>
+
+    </head>
+  <body>
+
+        <!-- Fixed navbar -->
+    <div class="navbar navbar-inverse navbar-fixed-top">
+      <div class="container">
+        <div class="navbar-header">
+          <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+          </button>
+          <a class="navbar-brand" href="../index.html">ITP DWD Fall 2013</a>
+        </div>
+        <div class="navbar-collapse collapse">
+          <ul class="nav navbar-nav">
+            <li><a href="../page/quicknotes.html">Web Dev Cheatsheet</a></li>
+            <li><a href="../forum.html">Forum</a></li>
+            <li class="dropdown">
+              <a href="week_6.html#" class="dropdown-toggle" data-toggle="dropdown">Previous DWD Classes <b class="caret"></b></a>
+              <ul class="dropdown-menu">
+                <li><a href="http://itpwebclass.herokuapp.com/">NodeJS - Spring 2013</a></li>
+                <li><a href="http://itppyweb2012.herokuapp.com/">Python - Fall 2012</a></li>
+              </ul>
+            </li>
+          </ul>          
+        </div><!--/.nav-collapse -->
+      </div>
+    </div>
+
+    <div class="container">
+      
+      
+
+<br>
+<div class="page-header">
+	<h1>October 08<br>Week 6: More Databases - Inserting &amp; Form Validation</h1>
+	<p class="lead">Form validation when accepting user data</p>
+</div>
+
+<div class="row">
+	<div class="col-md-2">
+		
+		<ul class="nav nav-pills nav-stacked">
+			<li class="active"><a href="week_6.html#notes">Class notes</a></li>
+			<li><a href="week_6.html#assignment">Assignment</a></li>
+			<li><a href="week_6.html#discussion">Discussion</a></li>
+		</ul>
+	</div>
+	<div class="col-md-10">
+
+		
+		<div id="notes">
+			<p>Github (Same as week 5)<a href="https://github.com/johnschimmel/ITP-DWD-Fall-2012-Week-5">https://github.com/johnschimmel/ITP-DWD-Fall-2012-Week-5</a></p>
+<p>demo site :&nbsp;<a href="http://itp-ideas-dwd.herokuapp.com/">http://itp-ideas-dwd.herokuapp.com/</a></p>
+<h2>&nbsp;</h2>
+<h2>MongoLab &amp; MongoDB</h2>
+<h3>Creating database</h3>
+<p>If you need a database Heroku Addons offers a variety of options. You have MySQL, Postgres, CouchDB, MongoDB and others to choose from, the services are offered by 3rd party companies. Often, great for developers, they have a free starter version to let you test it out before paying.</p>
+<p>In DWD (Fall 2013) we are going with MongoLab, <a href="https://devcenter.heroku.com/articles/mongolab">https://devcenter.heroku.com/articles/mongolab</a> They provide a free to try sandbox MongoDB instance with 500mb. How nice!</p>
+<p>To add a database to an existing Heroku app, open your code directory in Terminal. Run the command (<em><em> you will need to have a credit card associated with your account, even though nothing will be charged </em></em>).</p>
+<pre><code>heroku addons:add mongolab:sandbox
+</code></pre>
+<p>If successful, you should be able to see in your Heroku App control panel that MongoLabs is a resource.</p>
+<h3>Configuring local environment</h3>
+<p>When you added MongoLab to Heroku, Heroku and MongoLab provide you with a secure connection string which will allow you access to the MongoDB instance.</p>
+<p>Heroku keeps this information in the <strong>heroku config</strong> If you run the command</p>
+<pre><code>heroku config
+</code></pre>
+<p>You should see something with <strong>MONGOLAB_URI:BLAH@BLAH.COM/BLAH</strong></p>
+<p>We can copy this MONGOLAB_URI string to our local development envionment so we can work locally and still have access to the main database.</p>
+<p>Run the following command to copy the MONGOLAB_URI from heroku config and put it inside a <strong>.env</strong> file</p>
+<pre><code>heroku config --shell | grep MONGOLAB_URI &gt;&gt; .env
+</code></pre>
+<p>You can open you new/existing .env file to confirm that the MONGOLAB_URI connection string is present.</p>
+<h3>Heroku config variables</h3>
+<p>We will use Heroku config vars throughout the semester, often they give us credentials for Addons services, secret keys/salts and hashes, or we can set custom variables for development and production servers. <a href="https://devcenter.heroku.com/articles/config-vars">You can read more here</a>.</p>
+<h2>Updating requirements.txt</h2>
+<p>Open requirements.txt and add the following requirement if it does not already exist</p>
+<p><strong>Note: If you do not have GCC installed, you should install the OSX GCC Installer for your operating system <a href="https://github.com/kennethreitz/osx-gcc-installer/">https://github.com/kennethreitz/osx-gcc-installer/</a></strong></p>
+<p><strong>Requirements.txt</strong></p>
+<pre><code>Flask==0.10
+Mongoengine==0.8.4
+Flask-mongoengine==0.7
+Unidecode==0.04.14
+</code></pre>
+<p>MongoEngine will be our MongoDB Python Module. It gives us many helpful, easy to use, functions and classes to manage and use our MongoDB instance. We will also use it along with another module for form validation in the future.</p>
+<p>Let's install it. In your code directory in Terminal run the following commands to turn on virtualenv and to install all requirements. (This assumes you have created a virtualenv with the command "virtualenv venv" inside your code directory)</p>
+<pre><code>. venv/bin/activate
+install pip -r requirements.txt
+</code></pre>
+<p>This will scroll through and install all requirements and their dependencies.</p>
+<p>If successful we can now add the connection code to <strong>app.py</strong>.</p>
+<hr />
+<h2>Connecting with App.py</h2>
+<p>In App.py, our main code, we need to do a few things to get connected to MongoLab's MongoDB instance.</p>
+<ul>
+<li>Import all requirements for MongoEngine.</li>
+<li>Make connection to MongoLab database using MONGOLAB_URI in our .env config file.</li>
+</ul>
+<p>Importing MongoEngine</p>
+<p>The top of you app.py file should have the following import statements</p>
+<p><strong>inside app.py</strong></p>
+<pre><code># import os and regex
+import os, re
+
+# import all of mongoengine
+from mongoengine import *
+</code></pre>
+<p>This will bring in everything from the MongoEngine module.</p>
+<p>A few lines down from the top we need to create a connection, shown below is an example of the Flask app getting created then a connection being made.</p>
+<p><strong>inside app.py</strong></p>
+<pre><code>app = Flask(__name__)   # create our flask app
+
+# --------- Database Connection ---------
+# MongoDB connection to MongoLab's database
+app.config['MONGODB_SETTINGS'] = {'HOST':os.environ.get('MONGOLAB_URI'),'DB': 'dwdfall2013'}
+app.logger.debug("Connecting to MongoLabs")
+db = MongoEngine(app) # connect MongoEngine with Flask App
+</code></pre>
+<p>Test it, run the server from your code directory in Terminal</p>
+<pre><code>foreman start
+</code></pre>
+<hr />
+<h2>Models</h2>
+<p>Now with our database connected, it isn't really doing anything.</p>
+<p>We can shape our data with Models, representations of the data we want to create, query and work with to make our app.</p>
+<p>Here is an example</p>
+<p><strong>models.py</strong></p>
+<script type="text/javascript" src="https://gist.github.com/3859174.js?file=gistfile1.txt"></script>
+
+<p>An example route, that will create a new Idea and save it to the database. This route will do 2 things</p>
+<ul>
+<li>If incoming request is a POST, create a new idea.</li>
+<li>
+<p>Else display the main.html template.</p>
+<p><script type="text/javascript" src="https://gist.github.com/3859214.js?file=gistfile1.txt"></script></p>
+</li>
+</ul>
+<p>The rendered template for the route above is here <a href="https://github.com/johnschimmel/ITP-Python-Databases-Week5/blob/master/templates/main.html"><strong>main.html</strong> is here</a>.</p>
+<p>The process of the route above happens in this order.</p>
+<ul>
+<li>User requests the main page of the app, '/'.</li>
+<li>
+<p>Incoming request, gets routed to '/' and runs the index() function</p>
+<ul>
+<li>Inside index(), an <strong>idea_form</strong> variable is created, it will hold all the functions for form display and validation.</li>
+<li>
+<p>Next, if statement to determine if request was POST. It is not, it is GET, skip to Else branch.</p>
+<ul>
+<li>In Else statement, we determine if any categories were passed, skipping this because we are a GET request.</li>
+<li>Prepare templateData variable. Return rendered template to user.</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>
+<p>If user submits the form, we receive a POST request to '/'.</p>
+</li>
+<li>
+<p>index() function is executed.</p>
+<ul>
+<li><strong>idea_form</strong> is created from models.py. We will use this to validate our data.</li>
+<li>We are a POST request and now we check to see if the form is valid.</li>
+<li>
+<p>If the form is valid, continue inside the If statement and create a new Idea.</p>
+</li>
+<li>
+<p>Save the Idea</p>
+</li>
+<li>Redirect to the new Idea page</li>
+</ul>
+</li>
+<li>
+<p>If the form is not valid, let's inform the user. We skip down to the Else statement.</p>
+</li>
+<li>
+<p>Prepare the categories checkboxes (this was more work than it needed to be, we just needed to populate the idea_form with the previously selected data).</p>
+</li>
+<li>Build the templateData and return the rendered template to the user.</li>
+<li>This rendered template is different though. The HTML<form>will be populated with the valid form fields using the <strong>idea_form</strong>.</form></li>
+</ul>
+<h1>This week - WTForm validation</h1>
+<h3>Updated files</h3>
+<p><strong>Models.py</strong></p>
+<p>1) New requirement, wtforms, include the following from/import statement near the top of your file</p>
+<pre><code>from flask.ext.mongoengine.wtf import model_form
+</code></pre>
+<p>2) Create a new WTForm object called <strong>IdeaForm</strong> this object will be used to validate form. Place this at the bottom of your models.py file.</p>
+<pre><code>IdeaForm = model_form(Idea)
+</code></pre>
+<p>3) Our data model, Idea, was modified to provide more information to our WTForm, form validation tool.</p>
+<script type="text/javascript" src="https://gist.github.com/3859174.js?file=models.py"></script>
+
+<ul>
+<li>main.html</li>
+</ul>
+<p>&nbsp;</p>
+<p>Biggest change is with WTForm validation, the form labels, fields and errors can be automatically created and displayed for us.</p>
+<script type="text/javascript" src="https://gist.github.com/3859513.js?file=sample_form.html"></script>
+
+<h3>.env file changes</h3>
+<p>Add SECRET_KEY to your .env file. The value can be any random keyboard bashing</p>
+<pre><code>SECRET_KEY=asdflasdfasdf
+</code></pre>
+<p>IMPORTANT! Add the SECRET_KEY to Heroku as well. Run the following command in Terminal from your code directory.</p>
+<pre><code>heroku config:set SECRET_KEY=asdflasdfasdf
+</code></pre>
+<h3>app.py changes</h3>
+<p>Top of app.py file, preparing Flask for WTForm</p>
+<pre><code>app.config['CSRF_ENABLED'] = True
+app.config['SECRET_KEY'] = os.environ.get('SECRET_KEY')
+</code></pre>
+<p>Changes to how we process an incoming form POST</p>
+<pre><code>@app.route("/", methods=['GET','POST'])
+def index():
+
+# get the WTForm form from models
+idea_form = models.IdeaForm(request.form)
+
+# if form was submitted and it is valid...
+if request.method == "POST" and idea_form.validate():
+
+    # get form data - create new idea
+    idea = models.Idea()
+    idea.creator = request.form.get('creator','anonymous')
+    idea.title = request.form.get('title','no title')
+    idea.slug = slugify(idea.title + " " + idea.creator)
+    idea.idea = request.form.get('idea','')
+
+    # getlist will pull multiple items 'categories' into a list
+    idea.categories = request.form.getlist('categories')
+
+    idea.save() # save it
+
+    # redirect to the new idea page
+    return redirect('/ideas/%s' % idea.slug)
+
+else:
+
+    # for form management, checkboxes are weird (in wtforms)
+    # prepare checklist items for form
+    # you'll need to take the form checkboxes submitted
+    # and idea_form.categories list needs to be populated.
+    if request.method=="POST" and request.form.getlist('categories'):
+        for c in request.form.getlist('categories'):
+            idea_form.categories.append_entry(c)
+
+
+    # render the template
+    # include the idea_form as 'form'
+    templateData = {
+        'ideas' : models.Idea.objects(),
+        'categories' : categories,
+        'form' : idea_form
+    }
+    return render_template("main.html", **templateData)
+</code></pre>
+		</div>
+
+		<hr>
+		<a name="assignment"></a>
+		<div class="page-header" id="assignment">
+			<h3>Assignment</h3>
+			
+			
+			<div class="row">
+				<div class="col-md-10">
+					
+				</div>
+			</div>
+
+		</div>
+		
+		<a name="discussion"></a>
+		<div class="page-header" id="discussion">
+			<h3>Discussion</h3>
+			
+		</div>
+		<div class="row">
+			<div class="col-md-8">
+				<a class="moot" data-show_online="true"
+				   href="https://moot.it/i/itpdwd/classnotes/week_6">
+				   Comments for this class topic.
+				</a>
+		        
+
+			</div>
+		</div>
+	</div>
+</div>
+
+
+      <hr>
+
+      <footer>
+        <p>Dynamic Web Development | John Schimmel | Interactive Telecommunications Program, NYU</p>
+      </footer>
+    </div> <!-- /container -->
+
+    
+	
+
+        <script src="http://cdnjs.cloudflare.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
+        <script src="http://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.0.0-rc2/js/bootstrap.min.js"></script>
+        <script src="../static/js/main.js"></script>
+        <script>
+          (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+          (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+          m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+          })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+          ga('create', 'UA-43580620-1', 'itppyweb.herokuapp.com');
+          ga('send', 'pageview');
+        </script>
+    
+  	<!-- (1) Moot client application -->
+   	<script src="https://cdn.moot.it/1/moot.min.js"></script>
+
+    </body>
+</html>

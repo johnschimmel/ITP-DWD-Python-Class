@@ -1,0 +1,329 @@
+<!DOCTYPE html>
+<!--[if lt IE 7]>      <html class="no-js lt-ie9 lt-ie8 lt-ie7"> <![endif]-->
+<!--[if IE 7]>         <html class="no-js lt-ie9 lt-ie8"> <![endif]-->
+<!--[if IE 8]>         <html class="no-js lt-ie9"> <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js"> <!--<![endif]-->
+    <head>
+        
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+        <title>Dynamic Web Development</title>
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width">
+        <link rel="stylesheet" href="http://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.0.0-rc2/css/bootstrap.min.css">
+        <style>body {
+                padding-top: 60px;
+                padding-bottom: 40px;
+            }
+        </style>
+        
+        <script src="http://cdnjs.cloudflare.com/ajax/libs/modernizr/2.6.2/modernizr.min.js"></script>
+        
+    </head>
+  <body>
+
+        <!-- Fixed navbar -->
+    <div class="navbar navbar-inverse navbar-fixed-top">
+      <div class="container">
+        <div class="navbar-header">
+          <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+          </button>
+          <a class="navbar-brand" href="index.html">ITP DWD Fall 2013</a>
+        </div>
+        <div class="navbar-collapse collapse">
+          <ul class="nav navbar-nav">
+            <li><a href="page/quicknotes.html">Web Dev Cheatsheet</a></li>
+            <li><a href="forum.html">Forum</a></li>
+            <li class="dropdown">
+              <a href="index.html#" class="dropdown-toggle" data-toggle="dropdown">Previous DWD Classes <b class="caret"></b></a>
+              <ul class="dropdown-menu">
+                <li><a href="http://itpwebclass.herokuapp.com/">NodeJS - Spring 2013</a></li>
+                <li><a href="http://itppyweb2012.herokuapp.com/">Python - Fall 2012</a></li>
+              </ul>
+            </li>
+          </ul>          
+        </div><!--/.nav-collapse -->
+      </div>
+    </div>
+
+    <div class="container">
+      
+      
+      
+<div class="row">
+  <div class="col-md-8 col-md-push-3">
+    <div class="page-header">
+      <h2>ITP Dynamic Web Development - Fall 2013</h2>
+    </div>
+    
+    <h5>
+      @ <a href="http://itp.nyu.edu">Interactive Telecommunications Program</a> / NYU
+      <br>
+      with John Schimmel - <a href="mailto:schimmel@nyu.edu">schimmel@nyu.edu</a><br>
+      Tuesdays, 6:30 - 9:00PM<br>
+
+      <br>
+      <a href="index.html">http://itppyweb.heroku.com</a>
+    </h5>
+
+    <div class="page-header"><strong>Description</strong></div>
+    <p>
+      If you ever had a need to collect information from users on the web or use external data in your project, understanding web development will make your life much easier. The class will explore interaction between server-side and client-side of web development using Python and JavaScript. On the client-side, we will cover traditional JavaScript and the jQuery library to manipulate browser content, create and trigger page events and make AJAX data requests. Developing with Python on the server-side, we will explore receiving input from a user then querying and saving that data to a database, and finally, returning the appropriate content to the client, i.e. HTML or JSON. The websites we use today are rarely on a single database, we will focus on consuming data APIs from websites like Foursquare (for location information), Facebook (for social graph). Going further, we will create custom data APIs for use at ITP and open to the public.
+    </p>
+    <p>
+      Students must have prior HTML & CSS experience or be willing to learn it outside of class. Introduction to Computational Media or prior object oriented programming knowledge is required.
+    </p>
+
+    <div class="page-header"><strong>Requirements</strong></div>
+    <ul>
+      <li>Students must attend all classes and arrive on time to the start of class and any office hour appointments.</li>
+      <li>Respect your fellow students' questions and comments.</li>
+      <li>Be 'here'. Participate in class.</li>
+      <li>Assignments are given for each class to practice and try out recent topics. All assignments are required and must be completed.</li>
+      <li>Stay in touch - please email me if you need to miss class or need extra help.</li>
+      <li>No computer usage in class that is not relevant to the current topic.</li>
+    </ul>
+
+    <div class="page-header"><strong>Grading</strong></div>
+    <ul>
+      <li>30% Participation and contributions</li>
+      <li>40% Completed Assignments and documentation</li>
+      <li>30% Final project and documentation</li>
+    </ul>
+    
+    <div class="page-header"><strong>Office Hours</strong></div>
+    <p>TBD</p>    
+    
+    <hr>
+
+    <div class="page-header">
+      <h3>Syllabus</h3>
+    </div>
+    
+    <div id="syllabus_list">
+    
+      <div>
+        <h4>September 03 Week 1: Introduction to web development</h4>
+        <p>Introduction to web servers. Semester overview. Getting environments set up.<p>
+      </div>
+      <hr/>
+    
+      <div>
+        <h4>September 10 Week 2: Python Crash Course</h4>
+        <p>Python overview, variables, conditions, lists, dictionaries, loop and tabs.<p>
+      </div>
+      <hr/>
+    
+      <div>
+        <h4>September 17 Week 3: WWW! Introduction to Flask, Git and Heroku</h4>
+        <p>Getting our first web server set up and running. &#34;Hello World&#34; wide web literally.<p>
+      </div>
+      <hr/>
+    
+      <div>
+        <h4>September 24 Week 4: Flask - Request, Responses &amp; Templates</h4>
+        <p>Setting up Flask for templates (html) and static files (images, css and js). Separating code, data and design.<p>
+      </div>
+      <hr/>
+    
+      <div>
+        <h4>October 01 Week 5: Databases - Introduction to MongoDB</h4>
+        <p>Setting up MongoDB with Heroku Addons. Thinking about data structure &amp; schemas.<p>
+      </div>
+      <hr/>
+    
+      <div>
+        <h4>October 08 Week 6: More Databases - Inserting &amp; Form Validation</h4>
+        <p>Form validation when accepting user data<p>
+      </div>
+      <hr/>
+    
+      <div>
+        <h4>October 22 Week 7: More Databases - Reference fields and Forms that love you back</h4>
+        <p>Queries and Reference fields with Mongo<p>
+      </div>
+      <hr/>
+    
+      <div>
+        <h4>October 29 Week 8: Introduction to JSON, API&#39;s &amp; REST</h4>
+        <p>JSON, your new best friend. Sharing and using remote data easily with API&#39;s and REST. Creating a simple API to share your data.<p>
+      </div>
+      <hr/>
+    
+      <div>
+        <h4>November 05 Week 9: Using Remote API&#39;s &amp; more JSON</h4>
+        <p>How to use remote web apis. Examples with Foursquare and Twilio.
+<p>
+      </div>
+      <hr/>
+    
+      <div>
+        <h4>November 12 Week 10: Users, Sessions &amp; Authentication</h4>
+        <p>Libraries and functions to add user registration and authentication for managing access to content.<p>
+      </div>
+      <hr/>
+    
+      <div>
+        <h4>November 19 Week 11: Uploading Files and Images / Amazon S3</h4>
+        <p>Uploading files and images from a browser to Heroku and saving on Amazon S3. Saving and querying images by user from database.<p>
+      </div>
+      <hr/>
+    
+      <div>
+        <h4>November 26 Week 12: Realtime Web - Instant Gratification</h4>
+        <p>Using realtime communication between from server to client, client to client or server to server.<p>
+      </div>
+      <hr/>
+    
+      <div>
+        <h4>December 03 Week 13: Processing and Arduino as Web Servers and Clients</h4>
+        <p>Getting Processing and Arduino to provide and consume web API&#39;s. Spacebrew is a great tool to make the interaction between different applications and devices happen and persist.<p>
+      </div>
+      <hr/>
+    
+      <div>
+        <h4>December 10 Week 14: return {&#39;TheEnd&#39;: True}</h4>
+        <p>Present final projects and say our final thoughts<p>
+      </div>
+      <hr/>
+    
+    </div>
+
+  </div>
+  
+  <div class="col-md-3 col-md-pull-8" id="side_schedule">
+    <h4>Schedule</h4>
+    
+    
+    September 03
+    <h5>Week 1: Introduction to web development</h5>
+    
+    <a href="notes/week_1.html" class="btn btn-primary">View notes</a>
+    
+    <hr/>
+    
+    September 10
+    <h5>Week 2: Python Crash Course</h5>
+    
+    <a href="notes/week_2.html" class="btn btn-primary">View notes</a>
+    
+    <hr/>
+    
+    September 17
+    <h5>Week 3: WWW! Introduction to Flask, Git and Heroku</h5>
+    
+    <a href="notes/week_3.html" class="btn btn-primary">View notes</a>
+    
+    <hr/>
+    
+    September 24
+    <h5>Week 4: Flask - Request, Responses &amp; Templates</h5>
+    
+    <a href="notes/week_4.html" class="btn btn-primary">View notes</a>
+    
+    <hr/>
+    
+    October 01
+    <h5>Week 5: Databases - Introduction to MongoDB</h5>
+    
+    <a href="notes/week_5.html" class="btn btn-primary">View notes</a>
+    
+    <hr/>
+    
+    October 08
+    <h5>Week 6: More Databases - Inserting &amp; Form Validation</h5>
+    
+    <a href="notes/week_6.html" class="btn btn-primary">View notes</a>
+    
+    <hr/>
+    
+    October 22
+    <h5>Week 7: More Databases - Reference fields and Forms that love you back</h5>
+    
+    <a href="notes/week_7.html" class="btn btn-primary">View notes</a>
+    
+    <hr/>
+    
+    October 29
+    <h5>Week 8: Introduction to JSON, API&#39;s &amp; REST</h5>
+    
+    <a href="notes/week_8.html" class="btn btn-primary">View notes</a>
+    
+    <hr/>
+    
+    November 05
+    <h5>Week 9: Using Remote API&#39;s &amp; more JSON</h5>
+    
+    <a href="notes/week_9.html" class="btn btn-primary">View notes</a>
+    
+    <hr/>
+    
+    November 12
+    <h5>Week 10: Users, Sessions &amp; Authentication</h5>
+    
+    <a href="notes/week_10.html" class="btn btn-primary">View notes</a>
+    
+    <hr/>
+    
+    November 19
+    <h5>Week 11: Uploading Files and Images / Amazon S3</h5>
+    
+    <a href="notes/week_11.html" class="btn btn-primary">View notes</a>
+    
+    <hr/>
+    
+    November 26
+    <h5>Week 12: Realtime Web - Instant Gratification</h5>
+    
+    <a href="notes/week_12.html" class="btn btn-primary">View notes</a>
+    
+    <hr/>
+    
+    December 03
+    <h5>Week 13: Processing and Arduino as Web Servers and Clients</h5>
+    
+    <a href="notes/week_13.html" class="btn btn-primary">View notes</a>
+    
+    <hr/>
+    
+    December 10
+    <h5>Week 14: return {&#39;TheEnd&#39;: True}</h5>
+    
+    <a href="notes/week_14.html" class="btn btn-primary">View notes</a>
+    
+    <hr/>
+    
+  </div>
+
+  
+</div>
+
+
+
+
+      <hr>
+
+      <footer>
+        <p>Dynamic Web Development | John Schimmel | Interactive Telecommunications Program, NYU</p>
+      </footer>
+    </div> <!-- /container -->
+
+    
+
+        <script src="http://cdnjs.cloudflare.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
+        <script src="http://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.0.0-rc2/js/bootstrap.min.js"></script>
+        <script src="static/js/main.js"></script>
+        <script>
+          (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+          (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+          m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+          })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+          ga('create', 'UA-43580620-1', 'itppyweb.herokuapp.com');
+          ga('send', 'pageview');
+        </script>
+    
+    </body>
+</html>

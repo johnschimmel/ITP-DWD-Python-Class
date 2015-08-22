@@ -1,0 +1,219 @@
+<!DOCTYPE html>
+<!--[if lt IE 7]>      <html class="no-js lt-ie9 lt-ie8 lt-ie7"> <![endif]-->
+<!--[if IE 7]>         <html class="no-js lt-ie9 lt-ie8"> <![endif]-->
+<!--[if IE 8]>         <html class="no-js lt-ie9"> <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js"> <!--<![endif]-->
+    <head>
+        
+   
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+        <title>Dynamic Web Development</title>
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width">
+        <link rel="stylesheet" href="http://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.0.0-rc2/css/bootstrap.min.css">
+        <style>body {
+                padding-top: 60px;
+                padding-bottom: 40px;
+            }
+        </style>
+        
+        <script src="http://cdnjs.cloudflare.com/ajax/libs/modernizr/2.6.2/modernizr.min.js"></script>
+        
+   <!-- (1) Optimize for mobile versions: http://goo.gl/EOpFl -->
+   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+   <!-- (1) force latest IE rendering engine: http://goo.gl/tf4JH -->
+   <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+
+   <!-- (1) Moot look and feel -->
+   <link rel="stylesheet" href="https://cdn.moot.it/1/moot.css">
+
+   <!-- (4) Custom CSS -->
+   <style>body {
+      font-family: "myriad pro", tahoma, verdana, arial, sans-serif;
+      margin: 0; padding: 0;
+   }
+
+   .moot {
+      font-size: 18px;
+   }
+   </style>
+
+    </head>
+  <body>
+
+        <!-- Fixed navbar -->
+    <div class="navbar navbar-inverse navbar-fixed-top">
+      <div class="container">
+        <div class="navbar-header">
+          <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+          </button>
+          <a class="navbar-brand" href="../index.html">ITP DWD Fall 2013</a>
+        </div>
+        <div class="navbar-collapse collapse">
+          <ul class="nav navbar-nav">
+            <li><a href="quicknotes.html">Web Dev Cheatsheet</a></li>
+            <li><a href="../forum.html">Forum</a></li>
+            <li class="dropdown">
+              <a href="quicknotes.html#" class="dropdown-toggle" data-toggle="dropdown">Previous DWD Classes <b class="caret"></b></a>
+              <ul class="dropdown-menu">
+                <li><a href="http://itpwebclass.herokuapp.com/">NodeJS - Spring 2013</a></li>
+                <li><a href="http://itppyweb2012.herokuapp.com/">Python - Fall 2012</a></li>
+              </ul>
+            </li>
+          </ul>          
+        </div><!--/.nav-collapse -->
+      </div>
+    </div>
+
+    <div class="container">
+      
+      
+
+<br>
+<div class="page-header">
+	<h1>Web Dev Cheatsheet</h1>
+	
+</div>
+
+<div class="row">
+
+	<div class="col-md-10">
+
+		
+		<div id="notes">
+			<h1>Local Web Development with Python</h1>
+<h2>Initial VirtualEnv Setup</h2>
+<p><strong>If you have not setup Virtualenv on your working code directory use the steps below.</strong></p>
+<ol>
+<li>In Terminal console, open your code directory.</li>
+<li>
+<p>To create the Virtualenv run the following command,</p>
+<pre><code>virtualenv venv
+</code></pre>
+<p>This will create a new directory called <strong>venv</strong> to hold you code directory's Python modules.</p>
+</li>
+</ol>
+<h2>Running the local web server</h2>
+<ol>
+<li>In Terminal console, open your code directory.</li>
+<li>
+<p>Turn on Virtualenv for the directory.</p>
+<pre><code>source venv/bin/activate
+</code></pre>
+<p>Or use '.' instead of 'source', same thing.</p>
+<pre><code>. venv/bin/activate
+</code></pre>
+</li>
+<li>
+<p>Install new or modified Python modules.  This only needs to happen when needed, the first time code is run, or after a new module is added to <strong>requirements.txt</strong>.</p>
+<pre><code>pip install -r requirements.txt
+</code></pre>
+</li>
+<li>
+<p>Run the server</p>
+<pre><code>foreman start
+</code></pre>
+</li>
+<li>
+<p>Open web browser and view <a href="http://localhost:5000">http://localhost:5000</a> </p>
+</li>
+<li>To stop the server press <strong>CTRL+C</strong> inside the Terminal console.</li>
+</ol>
+<h2>Heroku - Getting your App to the Masses</h2>
+<p>When you local web server is working correctly, you can start to prepare your code for Heroku.</p>
+<h2>Initial Heroku Setup</h2>
+<ol>
+<li>
+<p>Create a Git repository, open your code directory in a Terminal console. The commands below will,</p>
+<ul>
+<li>Create the repo.</li>
+<li>Add all code files and assets</li>
+<li>Make initial commit to the Git repo with message.</li>
+</ul>
+<p>Run the following commands inside your code directory.</p>
+<pre><code>git init
+git add .
+git commit -am "initial commit"
+</code></pre>
+</li>
+<li>
+<p>Log into Heroku, this only needs to happen once in a while.</p>
+<pre><code>heroku login
+</code></pre>
+<p>If your Heroku keys are messed up have a look at <a href="https://devcenter.heroku.com/articles/keys">https://devcenter.heroku.com/articles/keys</a>.</p>
+</li>
+<li>
+<p>Create a new Heroku app. This will create a new weird subdomain for your app. This will add a new remote Git path in your Git repository.</p>
+<pre><code>heroku create
+</code></pre>
+</li>
+</ol>
+<h2>Pushing your code to Heroku</h2>
+<ol>
+<li>
+<p>Commit / Save your local code changes. Inside your code directory, commit your code.</p>
+<pre><code>git add .
+git commit -am "I made some changes...."
+</code></pre>
+</li>
+<li>
+<p>Push your code to Heroku. </p>
+<pre><code>git push heroku master
+</code></pre>
+<p>This command pushes your local code up to heroku (to the Heroku git branch is master).</p>
+</li>
+</ol>
+		</div>
+
+		
+		<a name="discussion"></a>
+		<div class="page-header" id="discussion">
+			<h3>Discussion</h3>
+			
+		</div>
+		<div class="row">
+			<div class="col-md-8">
+				<a class="moot" data-show_online="true"
+				   href="https://moot.it/i/itpdwd/page/quicknotes">
+				   Comments for this class topic.
+				</a>
+		        
+
+			</div>
+		</div>
+	</div>
+</div>
+
+
+      <hr>
+
+      <footer>
+        <p>Dynamic Web Development | John Schimmel | Interactive Telecommunications Program, NYU</p>
+      </footer>
+    </div> <!-- /container -->
+
+    
+	
+
+        <script src="http://cdnjs.cloudflare.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
+        <script src="http://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.0.0-rc2/js/bootstrap.min.js"></script>
+        <script src="../static/js/main.js"></script>
+        <script>
+          (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+          (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+          m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+          })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+          ga('create', 'UA-43580620-1', 'itppyweb.herokuapp.com');
+          ga('send', 'pageview');
+        </script>
+    
+  	<!-- (1) Moot client application -->
+   	<script src="https://cdn.moot.it/1/moot.min.js"></script>
+
+    </body>
+</html>

@@ -1,0 +1,246 @@
+<!DOCTYPE html>
+<!--[if lt IE 7]>      <html class="no-js lt-ie9 lt-ie8 lt-ie7"> <![endif]-->
+<!--[if IE 7]>         <html class="no-js lt-ie9 lt-ie8"> <![endif]-->
+<!--[if IE 8]>         <html class="no-js lt-ie9"> <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js"> <!--<![endif]-->
+    <head>
+        
+   
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+        <title>Dynamic Web Development</title>
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width">
+        <link rel="stylesheet" href="http://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.0.0-rc2/css/bootstrap.min.css">
+        <style>body {
+                padding-top: 60px;
+                padding-bottom: 40px;
+            }
+        </style>
+        
+        <script src="http://cdnjs.cloudflare.com/ajax/libs/modernizr/2.6.2/modernizr.min.js"></script>
+        
+   <!-- (1) Optimize for mobile versions: http://goo.gl/EOpFl -->
+   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+   <!-- (1) force latest IE rendering engine: http://goo.gl/tf4JH -->
+   <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+
+   <!-- (1) Moot look and feel -->
+   <link rel="stylesheet" href="https://cdn.moot.it/1/moot.css">
+
+   <!-- (4) Custom CSS -->
+   <style>body {
+      font-family: "myriad pro", tahoma, verdana, arial, sans-serif;
+      margin: 0; padding: 0;
+   }
+
+   .moot {
+      font-size: 18px;
+   }
+   </style>
+
+    </head>
+  <body>
+
+        <!-- Fixed navbar -->
+    <div class="navbar navbar-inverse navbar-fixed-top">
+      <div class="container">
+        <div class="navbar-header">
+          <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+          </button>
+          <a class="navbar-brand" href="../index.html">ITP DWD Fall 2013</a>
+        </div>
+        <div class="navbar-collapse collapse">
+          <ul class="nav navbar-nav">
+            <li><a href="../page/quicknotes.html">Web Dev Cheatsheet</a></li>
+            <li><a href="../forum.html">Forum</a></li>
+            <li class="dropdown">
+              <a href="week_14.html#" class="dropdown-toggle" data-toggle="dropdown">Previous DWD Classes <b class="caret"></b></a>
+              <ul class="dropdown-menu">
+                <li><a href="http://itpwebclass.herokuapp.com/">NodeJS - Spring 2013</a></li>
+                <li><a href="http://itppyweb2012.herokuapp.com/">Python - Fall 2012</a></li>
+              </ul>
+            </li>
+          </ul>          
+        </div><!--/.nav-collapse -->
+      </div>
+    </div>
+
+    <div class="container">
+      
+      
+
+<br>
+<div class="page-header">
+	<h1>December 10<br>Week 14: return {&#39;TheEnd&#39;: True}</h1>
+	<p class="lead">Present final projects and say our final thoughts</p>
+</div>
+
+<div class="row">
+	<div class="col-md-2">
+		
+		<ul class="nav nav-pills nav-stacked">
+			<li class="active"><a href="week_14.html#notes">Class notes</a></li>
+			<li><a href="week_14.html#assignment">Assignment</a></li>
+			<li><a href="week_14.html#discussion">Discussion</a></li>
+		</ul>
+	</div>
+	<div class="col-md-10">
+
+		
+		<div id="notes">
+			<div id="notes">
+      <h1 id="last-class-thoughts-on-web-programming">Last class - Thoughts on Web Programming...</h1>
+<h3 id="the-needs-improvment-section">The "needs improvment" section</h3>
+<ul>
+<li>Needs more diversity - more female and minority groups.</li>
+<li>Cowboys &amp; Ego.</li>
+</ul>
+<h3 id="things-to-avoid">Things to avoid</h3>
+<ul>
+<li>Avoid building a Conten Management Systems (CMS) from scratch.</li>
+<li>Avoid people who build CMS's from scratch.</li>
+<li>Delete/throw away job ads with the words ['ninja','guru','rockstar'].</li>
+<li>Avoid working at a place where you are the smartest programmer.</li>
+<li>Don't sit too much, get a standing desk.</li>
+</ul>
+<h3 id="the-good-parts">The good parts</h3>
+<ul>
+<li>You won't meet too many unemployed programmers.</li>
+<li>Pick your own path.</li>
+<li>Telecommuting was probably created by a programmer.</li>
+<li><b>"Waiting for permission" isn't always required on the Internet.<b></li>
+</ul>
+<h3>Languages</h3>
+<ul>
+<li>JavaScript
+<ul>
+<li><a href="http://nodejs.org/">NodeJS</a></li>
+<li><a href="http://jquery.com/">jQuery</a> (client side)</li>
+<li><a href="http://documentcloud.github.com/backbone/">Backbone</a></li>
+<li><a href="http://www.processing.org/">ProcessingJS</a></li>
+<li><a href="http://d3js.org/">D3</a></li>
+</ul>
+</li>
+<li>Python
+<ul>
+<li><a href="http://flask.pocoo.org/">Flask</a>&nbsp;(more)</li>
+<li><a href="http://www.tornadoweb.org/">Tornado</a></li>
+<li><a href="https://developers.google.com/appengine/docs/python/overview">Google AppEngine</a></li>
+</ul>
+</li>
+<li>Ruby
+<ul>
+<li><a href="http://www.sinatrarb.com/">Sinatra</a></li>
+</ul>
+<li>PHP? Sure, if you must.
+<ul>
+<li><a href="http://silex.sensiolabs.org/">Silex</a></li>
+</ul>
+</li>
+</ul>
+<h3>Databases</h3>
+<div>
+<ul>
+<li><a href="http://www.parse.com">Parse</a> (Database/storage cloud service)</li>
+<li><a href="http://www.mongodb.org/">MongoDB</a> (it does a lot more than we were exploring)</li>
+<li><a href="http://www.postgresql.org">Postgres</a><span style="color: #000000;">&nbsp;(SQL)</span></li>
+</ul>
+
+<h3>Realtime Web</h3>
+<div>
+  <ul>
+    <li><a href="http://docs.spacebrew.cc/">Spacebrew</a></li>
+    <li><a href="http://meteor.com/">Meteor</a></li>
+    <li><a href="http://socket.io/">Socket.io</a></li>
+    <li><a href="http://express-io.org/">Express.io (ExpressJS + SocketIO)</a></li>
+  </ul>
+</div>
+<h3>Mobile</h3>
+<div>
+<ul>
+<li><a href="http://www.jquerymobile.com/">jQuery Mobile</a></li>
+<li><a href="http://www.phonegap.com/">Phonegap</a></li>
+</ul>
+<div><strong>API</strong></div>
+<div>
+<ul>
+<li><a href="http://developers.facebook.com/">Facebook</a></li>
+<li><a href="http://developer.foursquare.com/">Foursquare</a></li>
+<li><a href="http://parse.com">Parse</a></li>
+<li><a href="http://www.twilio.com/">Twilio</a></li>
+<li><a href="http://www.pusher.com">Pusher</a></li>
+</ul>
+<p>&nbsp;</p>
+<h1>&nbsp;</h1>
+</div>
+</div>
+</div>
+
+</div>
+		</div>
+
+		<hr>
+		<a name="assignment"></a>
+		<div class="page-header" id="assignment">
+			<h3>Assignment</h3>
+			
+			
+			<div class="row">
+				<div class="col-md-10">
+					
+				</div>
+			</div>
+
+		</div>
+		
+		<a name="discussion"></a>
+		<div class="page-header" id="discussion">
+			<h3>Discussion</h3>
+			
+		</div>
+		<div class="row">
+			<div class="col-md-8">
+				<a class="moot" data-show_online="true"
+				   href="https://moot.it/i/itpdwd/classnotes/week_14">
+				   Comments for this class topic.
+				</a>
+		        
+
+			</div>
+		</div>
+	</div>
+</div>
+
+
+      <hr>
+
+      <footer>
+        <p>Dynamic Web Development | John Schimmel | Interactive Telecommunications Program, NYU</p>
+      </footer>
+    </div> <!-- /container -->
+
+    
+	
+
+        <script src="http://cdnjs.cloudflare.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
+        <script src="http://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.0.0-rc2/js/bootstrap.min.js"></script>
+        <script src="../static/js/main.js"></script>
+        <script>
+          (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+          (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+          m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+          })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+          ga('create', 'UA-43580620-1', 'itppyweb.herokuapp.com');
+          ga('send', 'pageview');
+        </script>
+    
+  	<!-- (1) Moot client application -->
+   	<script src="https://cdn.moot.it/1/moot.min.js"></script>
+
+    </body>
+</html>

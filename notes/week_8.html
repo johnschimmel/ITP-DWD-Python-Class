@@ -1,0 +1,280 @@
+<!DOCTYPE html>
+<!--[if lt IE 7]>      <html class="no-js lt-ie9 lt-ie8 lt-ie7"> <![endif]-->
+<!--[if IE 7]>         <html class="no-js lt-ie9 lt-ie8"> <![endif]-->
+<!--[if IE 8]>         <html class="no-js lt-ie9"> <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js"> <!--<![endif]-->
+    <head>
+        
+   
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+        <title>Dynamic Web Development</title>
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width">
+        <link rel="stylesheet" href="http://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.0.0-rc2/css/bootstrap.min.css">
+        <style>body {
+                padding-top: 60px;
+                padding-bottom: 40px;
+            }
+        </style>
+        
+        <script src="http://cdnjs.cloudflare.com/ajax/libs/modernizr/2.6.2/modernizr.min.js"></script>
+        
+   <!-- (1) Optimize for mobile versions: http://goo.gl/EOpFl -->
+   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+   <!-- (1) force latest IE rendering engine: http://goo.gl/tf4JH -->
+   <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+
+   <!-- (1) Moot look and feel -->
+   <link rel="stylesheet" href="https://cdn.moot.it/1/moot.css">
+
+   <!-- (4) Custom CSS -->
+   <style>body {
+      font-family: "myriad pro", tahoma, verdana, arial, sans-serif;
+      margin: 0; padding: 0;
+   }
+
+   .moot {
+      font-size: 18px;
+   }
+   </style>
+
+    </head>
+  <body>
+
+        <!-- Fixed navbar -->
+    <div class="navbar navbar-inverse navbar-fixed-top">
+      <div class="container">
+        <div class="navbar-header">
+          <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+          </button>
+          <a class="navbar-brand" href="../index.html">ITP DWD Fall 2013</a>
+        </div>
+        <div class="navbar-collapse collapse">
+          <ul class="nav navbar-nav">
+            <li><a href="../page/quicknotes.html">Web Dev Cheatsheet</a></li>
+            <li><a href="../forum.html">Forum</a></li>
+            <li class="dropdown">
+              <a href="week_8.html#" class="dropdown-toggle" data-toggle="dropdown">Previous DWD Classes <b class="caret"></b></a>
+              <ul class="dropdown-menu">
+                <li><a href="http://itpwebclass.herokuapp.com/">NodeJS - Spring 2013</a></li>
+                <li><a href="http://itppyweb2012.herokuapp.com/">Python - Fall 2012</a></li>
+              </ul>
+            </li>
+          </ul>          
+        </div><!--/.nav-collapse -->
+      </div>
+    </div>
+
+    <div class="container">
+      
+      
+
+<br>
+<div class="page-header">
+	<h1>October 29<br>Week 8: Introduction to JSON, API&#39;s &amp; REST</h1>
+	<p class="lead">JSON, your new best friend. Sharing and using remote data easily with API&#39;s and REST. Creating a simple API to share your data.</p>
+</div>
+
+<div class="row">
+	<div class="col-md-2">
+		
+		<ul class="nav nav-pills nav-stacked">
+			<li class="active"><a href="week_8.html#notes">Class notes</a></li>
+			<li><a href="week_8.html#assignment">Assignment</a></li>
+			<li><a href="week_8.html#discussion">Discussion</a></li>
+		</ul>
+	</div>
+	<div class="col-md-10">
+
+		
+		<div id="notes">
+			<div id="notes">
+            <p style="text-align: center;"><img style="display: block; margin-left: auto; margin-right: auto;" title="2 hand drawn computers telling each other jokes. one says,Did you hear the one about the elephant?. the other responds hahahaha." src="http://farm4.static.flickr.com/3072/2563408126_933e40b1ee.jpg?v=0" alt="2 hand drawn computers telling each other jokes. one says,Did you hear the one about the elephant?. the other responds hahahaha." width="500" height="376">illustration by <a title="Jenny LC website" href="http://www.jennylc.com">Jenny Chowdhury</a></p>
+<h1 id="really-quick-introduction-to-json-apis">Really quick introduction to JSON &amp; APIs</h1>
+<p>For the past few weeks we have been working with models and documents in MongoDB. We save, query and display data in HTML templates that are rendered in web browsers. The browser is the most popular web client but not the only client that can make requests to a web server.</p>
+<p>APIs or Application Programming Interfaces allow services and data to be requested from all kinds of external applications. One of the most useful things APIs allow is for one application to request and use data from another remote application, the returned data might be in the JSON format, or xml or csv. The requesting application then has the task to convert the received data into a native datatype that can be used easily.</p>
+<h3 id="what-is-json">What is JSON</h3>
+<ul>
+<li>JSON = JavaScript Object Notation. basically, it looks a like a javascript object if that object were converted to a string.</li>
+<li>JSON is plain text. It is a string.</li>
+<li>Structured formatting supports organizing variables and arrays.</li>
+</ul>
+<h3 id="helpful-links">Helpful links</h3>
+<ul>
+<li>Reference <a href="http://www.json.org/">http://www.json.org/</a></li>
+<li>Chrome extension for viewing JSON <a href="https://chrome.google.com/webstore/detail/jsonview/chklaanhfefbnpoihckbnefhakgolnmc">JSONView</a></li>
+</ul>
+<p>A JSON example</p>
+<pre><code>{ "name":"Tony", "age": 37, "favoriteColors":["blue","orange","red"] }
+</code></pre>
+<p>or</p>
+<pre><code>{
+    "name" : "Tony",
+    "age" : 37,
+    "favoriteColors" : ["blue","orange","red"]
+}
+</code></pre>
+<p>But wait! That looks just like a Python dictionary. Well not exactly, remember this is a string.</p>
+<p>In Python, we can create a JSON string (manually) like this</p>
+<pre><code>import json
+
+# myTonyJSON is a string with JSON syntax
+myTonyJSON = '{ "name" : "Tony", "age" : 37, "favoriteColors" : ["blue","orange","red"]}'
+
+# convert json string to Python
+pyTony = json.loads(myTonyJSON)
+
+print pyTony.get('name'), " favorite colors"
+for c in pyTony.get('favoriteColors'):
+    print c
+
+# display the datatype of pyTony (it's a dictionary)
+print type(pyTony)
+</code></pre>
+<p>Okay, that's cool. Now let's take a Python dictionary and convert it into JSON</p>
+<pre><code># native module with Python 2.7
+import json
+
+# our Python dictionary
+py_data = {
+    'name' : 'Antonia',
+    'age' : 35,
+    'favQuotes' : [
+        'Tastes like chicken.',
+        'I have a dream.',
+        'One small step for mankind.'
+    ]
+}
+
+# convert from Python dictionary to JSON
+my_json_data = json.dumps( py_data )
+
+# print it out
+print my_json_data
+
+# display the datatype of my_json_data (it's a string)
+print type(my_json_data)
+</code></pre>
+<h2 id="making-your-data-available-as-json-with-flask">Making your data available as JSON with Flask</h2>
+
+<p>The database demo app has been updated to include a JSON feed of all ideas and individual ideas. Check it out <a href="http://itp-ideas-dwd.herokuapp.com/">http://itp-ideas-dwd.herokuapp.com/</a>.</p>
+
+<p>Flask has a helper tool called <strong>jsonify</strong> that returns JSON and sets the correct MIME type in the response header.</p>
+<p>To use <strong>jsonify</strong> include the following at the top of your app.py file</p>
+<p>app.py</p>
+<pre><code>from flask import jsonify
+</code></pre>
+<p>A sample route to return your results as json.</p>
+<h3 id="live-demo-of-dataideashttpitp-ideas-dwdherokuappcomdataideas"><a href="http://itp-ideas-dwd.herokuapp.com/data/ideas">Live Demo of /data/ideas</a></h3>
+<script type="text/javascript" src="https://gist.github.com/4025736.js?file=jsonify_route.py"></script>
+
+<p>When returning JSON it is important to provide a status code or message along with the requested data. For example</p>
+<pre><code>{
+    'status' : 'OK',
+    'data' : [......]
+}
+</code></pre>
+<p>status = 'OK' or status = 'error' will allow people using your API to know the responses are valid or something has gone wrong.</p>
+
+
+<h2 id="requesting-data-from-a-remote-server-and-using-it">Requesting data from a remote server and using it</h2>
+
+<h4><a href="http://itp-remote-ideas-demo.herokuapp.com/">sample app</a></h4>
+<h4><a href="https://github.com/johnschimmel/ITP-Remote-Ideas-Demo">github code</a></h4>
+
+<p>Now let's request data from another data source, a remote server.</p>
+
+<p>For testing you can use the Ideas JSON feed here <a href="http://itp-ideas-dwd.herokuapp.com/data/ideas">http://itp-ideas-dwd.herokuapp.com/data/ideas</a>.</p>
+
+<p>We will use the Requests Python library to make an outgoing request from our webapps to another web resource.</p>
+<p><a href="http://docs.python-requests.org/en/latest/">Requests: HTTP for Humans</a> is a simple way to make GET and POST requests with Python.</p>
+<p>Add it to your requirements.txt file</p>
+<p>requirements.txt</p>
+<pre><code>
+Flask==0.10
+Requests==2.0.1
+</code></pre>
+
+<pre><code>. runpip
+</code></pre>
+<p>or more manually</p>
+<pre><code>. venv/bin/activate
+pip install -r requirements.txt
+</code></pre>
+<p>This should install Requests for you to use.</p>
+<p>Inside your app.py, add the following line to your imports at the top</p>
+<pre><code>import requests
+</code></pre>
+<p>Sample Flask route, requesting ITP Ideas</p>
+<script src="https://gist.github.com/johnschimmel/4025723.js"></script>
+
+
+        </div>
+		</div>
+
+		<hr>
+		<a name="assignment"></a>
+		<div class="page-header" id="assignment">
+			<h3>Assignment</h3>
+			
+			
+			<div class="row">
+				<div class="col-md-10">
+					<h2>Create a JSON feed of your data</h2>
+<h2>Use another student's JSON feed inside your web app</h2>
+				</div>
+			</div>
+
+		</div>
+		
+		<a name="discussion"></a>
+		<div class="page-header" id="discussion">
+			<h3>Discussion</h3>
+			
+		</div>
+		<div class="row">
+			<div class="col-md-8">
+				<a class="moot" data-show_online="true"
+				   href="https://moot.it/i/itpdwd/classnotes/week_8">
+				   Comments for this class topic.
+				</a>
+		        
+
+			</div>
+		</div>
+	</div>
+</div>
+
+
+      <hr>
+
+      <footer>
+        <p>Dynamic Web Development | John Schimmel | Interactive Telecommunications Program, NYU</p>
+      </footer>
+    </div> <!-- /container -->
+
+    
+	
+
+        <script src="http://cdnjs.cloudflare.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
+        <script src="http://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.0.0-rc2/js/bootstrap.min.js"></script>
+        <script src="../static/js/main.js"></script>
+        <script>
+          (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+          (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+          m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+          })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+          ga('create', 'UA-43580620-1', 'itppyweb.herokuapp.com');
+          ga('send', 'pageview');
+        </script>
+    
+  	<!-- (1) Moot client application -->
+   	<script src="https://cdn.moot.it/1/moot.min.js"></script>
+
+    </body>
+</html>

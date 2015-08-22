@@ -1,0 +1,320 @@
+<!DOCTYPE html>
+<!--[if lt IE 7]>      <html class="no-js lt-ie9 lt-ie8 lt-ie7"> <![endif]-->
+<!--[if IE 7]>         <html class="no-js lt-ie9 lt-ie8"> <![endif]-->
+<!--[if IE 8]>         <html class="no-js lt-ie9"> <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js"> <!--<![endif]-->
+    <head>
+        
+   
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+        <title>Dynamic Web Development</title>
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width">
+        <link rel="stylesheet" href="http://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.0.0-rc2/css/bootstrap.min.css">
+        <style>body {
+                padding-top: 60px;
+                padding-bottom: 40px;
+            }
+        </style>
+        
+        <script src="http://cdnjs.cloudflare.com/ajax/libs/modernizr/2.6.2/modernizr.min.js"></script>
+        
+   <!-- (1) Optimize for mobile versions: http://goo.gl/EOpFl -->
+   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+   <!-- (1) force latest IE rendering engine: http://goo.gl/tf4JH -->
+   <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+
+   <!-- (1) Moot look and feel -->
+   <link rel="stylesheet" href="https://cdn.moot.it/1/moot.css">
+
+   <!-- (4) Custom CSS -->
+   <style>body {
+      font-family: "myriad pro", tahoma, verdana, arial, sans-serif;
+      margin: 0; padding: 0;
+   }
+
+   .moot {
+      font-size: 18px;
+   }
+   </style>
+
+    </head>
+  <body>
+
+        <!-- Fixed navbar -->
+    <div class="navbar navbar-inverse navbar-fixed-top">
+      <div class="container">
+        <div class="navbar-header">
+          <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+          </button>
+          <a class="navbar-brand" href="../index.html">ITP DWD Fall 2013</a>
+        </div>
+        <div class="navbar-collapse collapse">
+          <ul class="nav navbar-nav">
+            <li><a href="../page/quicknotes.html">Web Dev Cheatsheet</a></li>
+            <li><a href="../forum.html">Forum</a></li>
+            <li class="dropdown">
+              <a href="week_5.html#" class="dropdown-toggle" data-toggle="dropdown">Previous DWD Classes <b class="caret"></b></a>
+              <ul class="dropdown-menu">
+                <li><a href="http://itpwebclass.herokuapp.com/">NodeJS - Spring 2013</a></li>
+                <li><a href="http://itppyweb2012.herokuapp.com/">Python - Fall 2012</a></li>
+              </ul>
+            </li>
+          </ul>          
+        </div><!--/.nav-collapse -->
+      </div>
+    </div>
+
+    <div class="container">
+      
+      
+
+<br>
+<div class="page-header">
+	<h1>October 01<br>Week 5: Databases - Introduction to MongoDB</h1>
+	<p class="lead">Setting up MongoDB with Heroku Addons. Thinking about data structure &amp; schemas.</p>
+</div>
+
+<div class="row">
+	<div class="col-md-2">
+		
+		<ul class="nav nav-pills nav-stacked">
+			<li class="active"><a href="week_5.html#notes">Class notes</a></li>
+			<li><a href="week_5.html#assignment">Assignment</a></li>
+			<li><a href="week_5.html#discussion">Discussion</a></li>
+		</ul>
+	</div>
+	<div class="col-md-10">
+
+		
+		<div id="notes">
+			<h1>Databases</h1>
+<p>Databases are regularly used on web sites to organize, store and retrieve data. There are different types of databases that are used on the Web, most popular are <a href="http://en.wikipedia.org/wiki/Relational_database_management_system">relational database management systems</a> like MySQL and Postgres. NoSQL is becoming more popular for certain types of content on the web that does not require the breadth of features relational databases provides.</p>
+<p>You can think of databases as a collection of tables, each holding a particular set of data. Each table includes rows for each piece of content. Each row is broken into columns to define each fields.</p>
+<p>Relational databases are built against the 'relational model' where data held in two different tables can be related by sharing a unique identifier or be associated with related data in a third table. Data is retrieved with SELECT and JOIN statements. We will not be using MySQL or Postgres in this class but they are good to know about if you have a need in the future.</p>
+<h3>Database Operations</h3>
+<p>Popular database operations include</p>
+<ul>
+<li>Insert / creating new data</li>
+<li>Querying / retrieving data</li>
+<li>Updating data</li>
+<li>Deleting data</li>
+<li>Relating data</li>
+</ul>
+<h3>Enter NoSQL - working with documents</h3>
+<p>We will be using <a href="http://www.mongodb.org/">MongoDB</a> as our database which is part of the NoSQL (not only SQL) database family. NoSQL differs from SQL based relational databases in the way it holds your data. NoSQL databases do not require a fixed schema, data definition, nor do they provide atomicity consistency, which basically means you might create duplicate data in your database.</p>
+<p>NoSQL is popular with many big Internet companies because it can scale horizontally easily by adding extra cheap hardware to increase capacity. For us, starting out, NoSQL and MongoDB are great because they are very similar to objects we have been working with through out the semester. As we get the data schema prepare and database connected we will see the data looks familiar and is easily inserted and queried.</p>
+<p>This week we will cover <strong>modeling, inserting &amp; querying data</strong>. Next week we will cover updating, deleting &amp; relating.</p>
+<h2>Demo site</h2>
+<h4><a href="http://itp-ideas-dwd.herokuapp.com">http://itp-ideas-dwd.herokuapp.com</a></h4>
+<h4>Github - <a href="https://github.com/johnschimmel/ITP-Python-Databases-Week5">https://github.com/johnschimmel/ITP-Python-Databases-Week5</a></h4>
+<h2>Getting Started with MongoDB on Heroku</h2>
+<p>We will be using Mongolab as our MongoDB host service, they have a free starter plan that we can easily associate with our Heroku accounts. When we have added the Mongolab service we will have a connection string that includes username, password and URI to the database server.</p>
+<h3>Step 1 : Download code, setup Git, heroku create</h3>
+<ol>
+<li>
+<p>Download the sample code from <a href="https://github.com/johnschimmel/ITP-Python-Databases-Week5">Github</a></p>
+</li>
+<li>
+<p>Navigate to code directory in Terminal. Create Git repo</p>
+<pre><code>git init
+git add .
+git commit -m "initial commit"
+</code></pre>
+</li>
+</ol>
+<p>Create virtual environment and install requirements</p>
+<pre><code>virtualenv venv
+. runpip
+</code></pre>
+<p>Requirements.txt has 2 new Python modules that will be used in the example.</p>
+<pre><code>Mongoengine==0.8.4
+Flask-mongoengine==0.7
+Unidecode==0.04.14
+</code></pre>
+<h2>Adding Mongolab to your Heroku App</h2>
+<h3>Addons</h3>
+<p>Heroku offers a <a href="https://addons.heroku.com/">lot of different Add-ons</a> for your apps. Many different types of databases, image tools, cache utilities are available from 3rd party companies. Many offer a trial plan to test and develop with before you commit to a paid plan.</p>
+<p>Mongolab offers a <a href="https://addons.heroku.com/mongolab">250MB MongoDB instance for free</a> (see here) : ) How wonderful.</p>
+<h3>Create a new Heroku app</h3>
+<p>With your code directory as an active git repository, easily create a new Heroku app with the following command.</p>
+<pre><code>heroku create
+</code></pre>
+<h3>Add Mongolab to your Heroku app</h3>
+<ul>
+<li>Navigate to the code folder of your app</li>
+<li>
+<p>In Terminal, add the MongoLab sandbox plan</p>
+<pre><code>heroku addons:add mongolab:sandbox
+</code></pre>
+</li>
+</ul>
+<p>This has added MongoLab to your app.</p>
+<h3>Configure your local environment</h3>
+<p>When adding Add-ons, Heroku will add the required configuration variables for the services including username, password, urls, etc.</p>
+<p>We must create a local configuration file to allow our local development server to connect to the Mongolab MongoDB instance. We can grab a copy of our Heroku configuration variables and put them inside a <strong>.env</strong> file, our environment variable file.</p>
+<p>Run the following command inside your code folder.</p>
+<pre><code>heroku config --shell | grep MONGOLAB_URI &gt;&gt; .env
+</code></pre>
+<p>This will create a new file, <strong>.env</strong> and it will contain a single line starting with MONGOLAB_URI and followed by a long connection url. This is the username and password for your Mongolab account.</p>
+<p><strong>.env</strong> file (example of contents)</p>
+<pre><code>MONGOLAB_URI=mongodb://heroku_app8083291:sadlfkweweroi........
+</code></pre>
+<h3>Add .env to .gitignore file</h3>
+<p>We want GIT to ignore the .env file, <strong>VERY IMPORTANT</strong> This keeps our environment variables safe and they won't get included inside our GIT repository (or worse, get pushed to Github).</p>
+<p>Open your .gitignore file and add '.env' on a new line. Save the file.</p>
+<p><strong>.gitignore</strong> file</p>
+<pre><code>.env
+</code></pre>
+<h3>Start your servers</h3>
+<pre><code>. start
+</code></pre>
+<p>or</p>
+<pre><code>. venv/bin/activate
+foreman start
+</code></pre>
+<p>If your server starts successfully, you're ready to start interacting with the database.</p>
+<h2>App.py - connecting to your database</h2>
+<p>We are using MongoEngine as our database library to connect to MongoDB. MongoEngine allows us to create Models (classes) of the data we want to store and provides a way to create, query, update and delete data.</p>
+<p>Data in MongoEngine is created and accessed like a regular Python object.</p>
+<h3>Import MongoEngine</h3>
+<p>To use MongoEngine we include the following code at the top of our file.</p>
+<pre><code># mongoengine database module
+from flask.ext.mongoengine import MongoEngine
+</code></pre>
+<h3>Connect to Mongolab using our variables from our .env file</h3>
+<pre><code># --------- Database Connection ---------
+# MongoDB connection to MongoLab's database
+app.config['MONGODB_SETTINGS'] = {'HOST':os.environ.get('MONGOLAB_URI'),'DB': 'dwdfall2013'}
+app.logger.debug("Connecting to MongoLabs")
+db = MongoEngine(app) # connect MongoEngine with Flask App
+</code></pre>
+<p><strong>os.environ</strong> is a dictionary of variables inside our .env file. Heroku also has a os.environ so the connection method will work exactly the same when running on Herokuapp.com.</p>
+<h3>Data model example</h3>
+<p><a href="https://mongoengine-odm.readthedocs.org/en/latest/guide/defining-documents.html">MongoEngine defining data documentation</a></p>
+<pre><code>class User(Document):
+    email = StringField(required=True)
+    first_name = StringField(max_length=50)
+    last_name = StringField(max_length=50)
+</code></pre>
+<h3>Create a new User like this</h3>
+<p><a href="https://mongoengine-odm.readthedocs.org/en/latest/guide/document-instances.html">Adding data with MongoEngine</a></p>
+<pre><code>john = User(email='jdoe@example.com', first_name='John', last_name='Doe')
+john.save()
+</code></pre>
+<p>or</p>
+<pre><code>john = User()
+john.email = 'jdoe@example.com'
+john.first_name = 'John'
+john.last_name = 'Doe'
+john.save()
+</code></pre>
+<h3>Accessing Data</h3>
+<p><a href="https://mongoengine-odm.readthedocs.org/en/latest/guide/querying.html">Querying with Mongolab</a></p>
+<pre><code>for user in models.User.objects:
+    print models.User.first_name + " " + models.User.last_name
+</code></pre>
+<h3>Querying with filters</h3>
+<pre><code>johndoes = models.User.objects(last_name='Doe')
+for jd in johndoes:
+    print jd.email
+</code></pre>
+<h3>Using it with templates</h3>
+<p>Query for all User objects, then render a template.</p>
+<pre><code>templateData = {
+    'users' : models.User.objects
+}
+return render_template('user_list.html', **templateData)
+</code></pre>
+<p>And the HTML with Jinja2 template tags</p>
+<pre><code>&lt;ul&gt;
+{% for user in users %}
+    &lt;li&gt;{{ user.first_name }} {{ user.last_name }}&lt;/li&gt;
+{% endfor %}
+&lt;/ul&gt;
+</code></pre>
+<h2>Mongolab Admin</h2>
+<p>You can see your MongoDB on Mongolab by accessing your Heroku resources tab.</p>
+<p>Quick method, via Terminal</p>
+<pre><code>heroku addons:open mongolab
+</code></pre>
+<p>Or</p>
+<ul>
+<li>Visit your Heroku Apps page <a href="https://dashboard.heroku.com/apps">https://dashboard.heroku.com/apps</a></li>
+<li>Select an app to view</li>
+<li>Click on <strong>Mongolab Starter</strong> in the Add-on's section (lower left corner).</li>
+</ul>
+<p>This is your admin control panel of your database. Your data is contained in collections, click on a collection name to see its content.</p>
+		</div>
+
+		<hr>
+		<a name="assignment"></a>
+		<div class="page-header" id="assignment">
+			<h3>Assignment</h3>
+			
+			
+			<div class="row">
+				<div class="col-md-10">
+					<p>This week we introduce databases and MongoDB. Using an existing web project or a new idea connect create a web form that will save user input into a database. Use the MongoLab free trial addon to get started. </p>
+<ul>
+<li>Your project should accept input (html form)</li>
+<li>Save input to a database.</li>
+<li>Display the database data.</li>
+</ul>
+<p>Post your Heroku URLs in the assignment section.</p>
+				</div>
+			</div>
+
+		</div>
+		
+		<a name="discussion"></a>
+		<div class="page-header" id="discussion">
+			<h3>Discussion</h3>
+			
+		</div>
+		<div class="row">
+			<div class="col-md-8">
+				<a class="moot" data-show_online="true"
+				   href="https://moot.it/i/itpdwd/classnotes/week_5">
+				   Comments for this class topic.
+				</a>
+		        
+
+			</div>
+		</div>
+	</div>
+</div>
+
+
+      <hr>
+
+      <footer>
+        <p>Dynamic Web Development | John Schimmel | Interactive Telecommunications Program, NYU</p>
+      </footer>
+    </div> <!-- /container -->
+
+    
+	
+
+        <script src="http://cdnjs.cloudflare.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
+        <script src="http://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.0.0-rc2/js/bootstrap.min.js"></script>
+        <script src="../static/js/main.js"></script>
+        <script>
+          (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+          (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+          m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+          })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+          ga('create', 'UA-43580620-1', 'itppyweb.herokuapp.com');
+          ga('send', 'pageview');
+        </script>
+    
+  	<!-- (1) Moot client application -->
+   	<script src="https://cdn.moot.it/1/moot.min.js"></script>
+
+    </body>
+</html>

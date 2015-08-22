@@ -1,0 +1,271 @@
+<!DOCTYPE html>
+<!--[if lt IE 7]>      <html class="no-js lt-ie9 lt-ie8 lt-ie7"> <![endif]-->
+<!--[if IE 7]>         <html class="no-js lt-ie9 lt-ie8"> <![endif]-->
+<!--[if IE 8]>         <html class="no-js lt-ie9"> <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js"> <!--<![endif]-->
+    <head>
+        
+   
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+        <title>Dynamic Web Development</title>
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width">
+        <link rel="stylesheet" href="http://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.0.0-rc2/css/bootstrap.min.css">
+        <style>body {
+                padding-top: 60px;
+                padding-bottom: 40px;
+            }
+        </style>
+        
+        <script src="http://cdnjs.cloudflare.com/ajax/libs/modernizr/2.6.2/modernizr.min.js"></script>
+        
+   <!-- (1) Optimize for mobile versions: http://goo.gl/EOpFl -->
+   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+   <!-- (1) force latest IE rendering engine: http://goo.gl/tf4JH -->
+   <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+
+   <!-- (1) Moot look and feel -->
+   <link rel="stylesheet" href="https://cdn.moot.it/1/moot.css">
+
+   <!-- (4) Custom CSS -->
+   <style>body {
+      font-family: "myriad pro", tahoma, verdana, arial, sans-serif;
+      margin: 0; padding: 0;
+   }
+
+   .moot {
+      font-size: 18px;
+   }
+   </style>
+
+    </head>
+  <body>
+
+        <!-- Fixed navbar -->
+    <div class="navbar navbar-inverse navbar-fixed-top">
+      <div class="container">
+        <div class="navbar-header">
+          <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+          </button>
+          <a class="navbar-brand" href="../index.html">ITP DWD Fall 2013</a>
+        </div>
+        <div class="navbar-collapse collapse">
+          <ul class="nav navbar-nav">
+            <li><a href="../page/quicknotes.html">Web Dev Cheatsheet</a></li>
+            <li><a href="../forum.html">Forum</a></li>
+            <li class="dropdown">
+              <a href="week_7.html#" class="dropdown-toggle" data-toggle="dropdown">Previous DWD Classes <b class="caret"></b></a>
+              <ul class="dropdown-menu">
+                <li><a href="http://itpwebclass.herokuapp.com/">NodeJS - Spring 2013</a></li>
+                <li><a href="http://itppyweb2012.herokuapp.com/">Python - Fall 2012</a></li>
+              </ul>
+            </li>
+          </ul>          
+        </div><!--/.nav-collapse -->
+      </div>
+    </div>
+
+    <div class="container">
+      
+      
+
+<br>
+<div class="page-header">
+	<h1>October 22<br>Week 7: More Databases - Reference fields and Forms that love you back</h1>
+	<p class="lead">Queries and Reference fields with Mongo</p>
+</div>
+
+<div class="row">
+	<div class="col-md-2">
+		
+		<ul class="nav nav-pills nav-stacked">
+			<li class="active"><a href="week_7.html#notes">Class notes</a></li>
+			<li><a href="week_7.html#assignment">Assignment</a></li>
+			<li><a href="week_7.html#discussion">Discussion</a></li>
+		</ul>
+	</div>
+	<div class="col-md-10">
+
+		
+		<div id="notes">
+			<h3>Demo code</h3>
+<p>Updated at <a href="https://github.com/johnschimmel/ITP-Python-Databases-Week5">https://github.com/johnschimmel/ITP-Python-Databases-Week5</a></p>
+<h3>Updating</h3>
+<script src="https://gist.github.com/johnschimmel/7105640.js"></script>
+
+<hr />
+<h3>Saving</h3>
+<pre><code># get the document you need
+idea = models.Idea.objects.get(slug=idea_slug)
+
+if idea:
+    # change the title
+    idea.title = "New Title"
+
+    try:
+        idea.save()  # save changes
+    except:
+        app.logger.error("unable to save idea %s" % idea_slug)
+&lt;/code&gt;&lt;/pre&gt;
+&lt;h3 id="deleting"&gt;Deleting&lt;/h3&gt;
+&lt;pre&gt;&lt;code&gt;# get the document you need
+idea = models.Idea.objects.get(slug=idea_slug)
+
+if idea:
+    try:
+        idea.delete()  # delete it. will fail if unable to delete
+    except:
+        app.logger.error("unable to delete the idea, %s" % idea_slug)
+</code></pre>
+<hr />
+<h3>Ordering results from Query</h3>
+<p>Ordering w/ MongoEngine <a href="https://mongoengine-odm.readthedocs.org/en/latest/guide/defining-documents.html#ordering">User Guide</a></p>
+<p>.order_by allows you to sort a field or fields in ascending/descending order.</p>
+<pre><code># descending timestamp, most recent first
+ideas = models.Idea.objects().order_by('-timestamp')
+
+# alphabetical by title  ( + sign is optional )
+ideas = models.Idea.objects().order_by('title')
+
+# multiple fields
+ideas = models.Idea.objects().order_by('title','-timestamp')
+</code></pre>
+<h3>Filter Your Data</h3>
+<p>How to query your data with MongoEngine - <a href="https://mongoengine-odm.readthedocs.org/en/latest/guide/querying.html">User Guide</a></p>
+<h4>Basic</h4>
+<pre><code># get all
+ideas = models.Idea.objects()
+
+# get Tony's ideas
+ideas = models.Idea.objects(creator='Tony')
+
+# get Tony's most recent idea
+idea = models.Idea.objects(creator='Tony').order_by('-timestamp').first()
+
+# or in another way
+idea = models.Idea.objects.get(creator='Tony').order_by('-timestamp')
+
+# multiple field query - Tony's physical computing ideas
+ideas = models.Idea.objects(creator='Tony',categories='physical computing')
+</code></pre>
+<h4>Search text</h4>
+<p>You can search the text of your documents with the <strong>__contains</strong> filter.</p>
+<pre><code># case sensitive
+ideas = models.Idea.objects(title__contains='Sneaker')
+
+# case insensitive
+ideas = models.Idea.objects(title__icontains='sneaker')
+</code></pre>
+<h4>Search inside embedded document</h4>
+<p>Search inside an embedded document for text</p>
+<pre><code># Ideas that Tony has commented on
+ideas = models.Idea.objects(comments__name='Tony').order_by('-comments__timestamp')
+</code></pre>
+<hr />
+<h3>Querysets</h3>
+<p>See default and custom QuerySets on MongoEngine <a href="https://mongoengine-odm.readthedocs.org/en/latest/guide/querying.html#default-document-queries">User Guide</a></p>
+<p>Example from <a href="https://mongoengine-odm.readthedocs.org/en/latest/guide/querying.html#default-document-queries">user guide</a></p>
+<pre><code># in your model file
+class BlogPost(Document):
+    title = StringField()
+    date = DateTimeField()
+
+    @queryset_manager
+    def objects(doc_cls, queryset):
+        # This may actually also be done by defining a default ordering for
+        # the document, but this illustrates the use of manager methods
+        return queryset.order_by('-date')
+</code></pre>
+<h3>Reference Fields in Models</h3>
+<p>Your documents can be related / associated with other documents using the Reference Field. You define reference fields in your models as a field type. Great documentation in the <a href="https://mongoengine-odm.readthedocs.org/en/latest/guide/defining-documents.html#reference-fields">user guide</a>.</p>
+<pre><code># Models
+class User(Document):
+    name = StringField()
+
+class Page(Document):
+    content = StringField()
+    author = ReferenceField(User)
+
+# create user and page
+tony = User(name="Tony Smith")
+tony.save()
+
+post = Page(content="Test Page")
+post.author = tony #  tony is the author
+post.save()
+</code></pre>
+<h3>Deleting</h3>
+<pre><code># fetch the Document you want
+idea = models.Idea.objects.get(title='The red shoe')
+
+# delete Document
+idea.delete()
+</code></pre>
+		</div>
+
+		<hr>
+		<a name="assignment"></a>
+		<div class="page-header" id="assignment">
+			<h3>Assignment</h3>
+			
+			
+			<div class="row">
+				<div class="col-md-10">
+					<h2>Populate your database with data</h2>
+<p>On week 8 we will be starting with JSON and APIs -  have some data in your database for class so we can explore how to make our data available to other applications and people.</p>
+				</div>
+			</div>
+
+		</div>
+		
+		<a name="discussion"></a>
+		<div class="page-header" id="discussion">
+			<h3>Discussion</h3>
+			
+		</div>
+		<div class="row">
+			<div class="col-md-8">
+				<a class="moot" data-show_online="true"
+				   href="https://moot.it/i/itpdwd/classnotes/week_7">
+				   Comments for this class topic.
+				</a>
+		        
+
+			</div>
+		</div>
+	</div>
+</div>
+
+
+      <hr>
+
+      <footer>
+        <p>Dynamic Web Development | John Schimmel | Interactive Telecommunications Program, NYU</p>
+      </footer>
+    </div> <!-- /container -->
+
+    
+	
+
+        <script src="http://cdnjs.cloudflare.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
+        <script src="http://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.0.0-rc2/js/bootstrap.min.js"></script>
+        <script src="../static/js/main.js"></script>
+        <script>
+          (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+          (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+          m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+          })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+          ga('create', 'UA-43580620-1', 'itppyweb.herokuapp.com');
+          ga('send', 'pageview');
+        </script>
+    
+  	<!-- (1) Moot client application -->
+   	<script src="https://cdn.moot.it/1/moot.min.js"></script>
+
+    </body>
+</html>
